@@ -4,47 +4,47 @@ Path.map("#/bio-work-list").to(function() {
 });
 
 Path.map("#/patient-history").to(function() {
-	$("#title_text").html("PATIENT HISTORY");
+	$("#title_text").html("HISTORY");
 	$("#stage").load("screens/patient_history.html");
 });
 
 Path.map("#/patient-careteam").to(function() {
-	$("#title_text").html("PATIENT CARE TEAM");
+	$("#title_text").html("CARE TEAM");
 	$("#stage").load("screens/patient_careteam.html");
 });
 
 Path.map("#/patient-images").to(function() {
-	$("#title_text").html("PATIENT IMAGES");
+	$("#title_text").html("IMAGES");
 	$("#stage").load("screens/patient_images.html");
 });
 
 Path.map("#/patient-medication").to(function() {
-	$("#title_text").html("PATIENT TREATMENTS");
+	$("#title_text").html("TREATMENTS");
 	$("#stage").load("screens/patient_medication.html");
 });
 
 Path.map("#/patient-documents").to(function() {
-	$("#title_text").html("PATIENT DOCUMENTS");
+	$("#title_text").html("DOCUMENTS");
 	$("#stage").load("screens/patient_documents.html");
 });
 
 Path.map("#/patient-response").to(function() {
-	$("#title_text").html("PATIENT RESPONSE");
+	$("#title_text").html("RESPONSE");
 	$("#stage").load("screens/patient_response.html");
 });
 
 Path.map("#/patient-timeline").to(function() {
-	$("#title_text").html("PATIENT TIMELINE");
+	$("#title_text").html("TIMELINE");
 	$("#stage").load("screens/patient_timeline.html");
 });
 
 Path.map("#/patient-schedule").to(function() {
-	$("#title_text").html("PATIENT SCHEDULE");
+	$("#title_text").html("SCHEDULE");
 	$("#stage").load("screens/patient_schedule.html");
 });
 
 Path.map("#/research-report-form").to(function() {
-	$("#title_text").html("BIOINFORMATICIAN HOME");
+	$("#title_text").html("RESEARCH REPORTS");
 	$("#stage").load("screens/bio_research_report_form.html");
 });
 
@@ -121,19 +121,19 @@ Path.map("#/study-view").to(function() {
 });
 
 Path.map("#/research-studies").to(function() {
-	$("#title_text").html("RESEARCH STUDIES");
+	$("#title_text").html("STUDIES");
 	$("#stage").load("screens/researcher_studies_screen.html");
 });
 Path.map("#/research-requests").to(function() {
-	$("#title_text").html("RESEARCH REQUESTS");
+	$("#title_text").html("REQUESTS");
 	$("#stage").load("screens/create_researcher_request.html");
 });
 Path.map("#/research-reports").to(function() {
-	$("#title_text").html("RESEARCH REPORTS");
+	$("#title_text").html("REPORTS");
 	$("#stage").load("screens/researcher_summary.html");
 });
 Path.map("#/research-templates").to(function() {
-	$("#title_text").html("RESEARCH TEMPLATES");
+	$("#title_text").html("TEMPLATES");
 	$("#stage").load("screens/researcher_templates.html");
 });
 

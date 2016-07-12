@@ -122,18 +122,18 @@ var firstWait2 = true;
 
 // Rendering Menu Items
 var menuObject = {
-	'bioinformatician' : [{menuItems : ['Work List', 'Studies', 'Research Reports', 'Data Sets', 'REST API Explorer', 'Tools', 'Archives'], 
-						   eventItems : ['bio-work-list', '', 'research-report-form', '', '', '', ''],
-						   iconItems : []
+	'bioinformatician' : [{menuItems : ['Home', 'Work List', 'Studies', 'Research Reports', 'Data Sets', 'REST API Explorer', 'Tools', 'Archives'], 
+						   eventItems : ['bioinformatician-home', 'bio-work-list', '', 'research-report-form', '', '', '', ''],
+						   iconItems : ['fa fa-home', 'fa fa-list-ol', 'fa fa-book', 'fa fa-bar-chart', 'fa fa-database', 'fa fa-gear', 'fa fa-wrench', 'fa fa-archive']
 						 }],
-	'director' : [{menuItems : [], eventItems : [], iconItems : []}],
-	'patient' : [{menuItems : ['My Schedule','My Timeline', 'My Response', 'My Documents', 'My Treatments', 'My Images', 'My Care Team','History'],
-				  eventItems : ['patient-schedule', 'patient-timeline', 'patient-response', 'patient-documents', 'patient-medication', 'patient-images', 'patient-careteam', 'patient-history'],
-				  iconItems : ['fa fa-calendar-check-o', 'fa fa-calendar', 'fa fa-file-text-o', 'fa fa-file', 'fa fa-file-text', 'fa fa-picture-o', 'fa fa-user-md', 'fa fa-book']
+	'director' : [{menuItems : ['Home'], eventItems : ['director-home'], iconItems : ['fa fa-home']}],
+	'patient' : [{menuItems : ['Home', 'Schedule','Timeline', 'Response', 'Documents', 'Treatments', 'Images', 'Care Team','History'],
+				  eventItems : ['patient-home', 'patient-schedule', 'patient-timeline', 'patient-response', 'patient-documents', 'patient-medication', 'patient-images', 'patient-careteam', 'patient-history'],
+				  iconItems : ['fa fa-home', 'fa fa-calendar-check-o', 'fa fa-calendar', 'fa fa-file-text-o', 'fa fa-file', 'fa fa-file-text', 'fa fa-picture-o', 'fa fa-user-md', 'fa fa-history']
 				}],
-	'researcher' : [{menuItems : ['Studies', 'Research Requests', 'Research Reports', 'Data Sets', 'REST API Explorer', 'Tools', 'Research Templates', 'Regulatory', 'Archives'], 
-				     eventItems : ['studies-screen', 'research-requests-screen', '', '', '', '', 'research-templates-screen', '', ''],
-				     iconItems : []}]
+	'researcher' : [{menuItems : ['Home', 'Studies', 'Research Requests', 'Research Reports', 'Data Sets', 'REST API Explorer', 'Tools', 'Research Templates', 'Regulatory', 'Archives'], 
+				     eventItems : ['researcher-home', 'studies-screen', 'research-requests-screen', '', '', '', '', 'research-templates-screen', '', ''],
+				     iconItems : ['fa fa-home', 'fa fa-book', 'fa fa-search', 'fa fa-bar-chart', 'fa fa-database', 'fa fa-gear', 'fa fa-wrench', '', 'fa fa-registered', 'fa fa-archive']}]
 };
 
 function getMenuInfo(loggedInUser){
@@ -143,12 +143,13 @@ function getMenuInfo(loggedInUser){
 	
 	var menu = [], currentMenu = loggedInUser[0];
 	
-	//console.log('menuItems.length = ' + currentMenu.menuItems.length + 'eventItems.length = ' + currentMenu.eventItems.length);
+	//console.log('menuItems.length = ' + currentMenu.menuItems.length + 'eventItems.length = ' + currentMenu.eventItems.length + 'iconItems.length = ' + currentMenu.iconItems.length);
 	
 	for(var i=0; i < currentMenu.menuItems.length; i++){
 		var Obj = {};
 		Obj.eventItem = currentMenu.eventItems[i];
 		Obj.menuItem = currentMenu.menuItems[i];
+		Obj.iconItem = currentMenu.iconItems[i];
 		menu.push(Obj);
 	}
 	return menu;

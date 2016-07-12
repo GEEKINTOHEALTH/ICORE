@@ -3,6 +3,12 @@
  */
 
 
+//compare screen relevant bindings
+$('body').bind('compare-screen', function(){
+	$("#fullscreen_stage").load("screens/patient_visit_compare.html");
+	showFullScreen();
+});
+
 //Researcher Templates page relevant bindings
 
 $('body').bind('show-template', function(e, data){
@@ -77,9 +83,22 @@ $('body').bind('register-screen', function(e, data) {
 	window.location.href = "#/signup";
 });
 
+
+// Home Bindings
 $('body').bind('director-home', function(e, data) {
 	window.location.href = "#/director-home";
 });
+$('body').bind('bioinformatician-home', function(e, data) {
+	window.location.href = "#/bioinformatician-home";
+});
+$('body').bind('researcher-home', function(e, data) {
+	window.location.href = "#/researcher-home";
+});
+$('body').bind('patient-home', function(e, data) {
+	window.location.href = "#/patient-home";
+});
+
+//-----------------------------------------------------------
 
 $('body').bind('bio-research-req-view', function(e, data) {
 	$("#restapi-explorer-id").removeClass('disabled');
