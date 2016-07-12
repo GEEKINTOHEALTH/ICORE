@@ -1,0 +1,12 @@
+<div class="container animated fadeInDown">
+	<div class="row" style="background: white;">
+		<div class="col-sm-12" align="center">
+			<iframe src="" width="100%" style="height: 90vh;" id="showtemplate"></iframe>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$('#showtemplate').attr('src', 'templates/' + LS.get_data('TEMPLATE-FILE'));
+	});
+</script>

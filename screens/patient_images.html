@@ -1,0 +1,58 @@
+<div class="container animated fadeInUp" style="margin-top: 20px;">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="table-wrapper card-2">
+				<div class="doc-head">
+					<a style="padding-left: 0px;">All</a>
+					<a>Admin</a>
+					<a>Lab</a>
+					<a>Scans</a>
+					<a>Reports</a>
+				</div>
+				<div class="pg-holder">
+					<button class="pull-left btn btn-default btn-sm" id="pg-left">
+						<i class="fa fa-arrow-left" aria-hidden="true"></i>
+					</button>
+					<button class="pull-right btn btn-default  btn-sm" id="pg-right">
+						<i class="fa fa-arrow-right" aria-hidden="true"></i>
+					</button>
+				</div>
+				<br>
+				<br>
+				<table class="sortable table-bordered  table-condensed table-hover" width="100%">
+					<thead style="background:#ffe5e5;">
+						<tr>
+							<th> NAME </th>
+							<th> SOURCE </th>
+							<th> IMAGE FORMAT </th>
+							<th> DATE </th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Scan 1</td>
+							<td>Inst/lab2</td>
+							<td>Jpg</td>
+							<td>11/12/2015</td>
+							<td><a  onclick="$('body').trigger('pathology-view');">View</a></td>
+						</tr>
+						<tr>
+							<td>Radiology 3</td>
+							<td>Inst/Rad Dept</td>
+							<td>DCM</td>
+							<td>11/12/2015</td>
+							<td><a  onclick="$('body').trigger('pathology-view');">View</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		$("#homebutton").show();
+		$("#top-right-holder").show();
+	}); 
+</script>

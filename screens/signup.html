@@ -1,0 +1,81 @@
+<form id="signup_form">
+	<div class="container-fluid animated fadeInUp" style="margin-top: 30px;">
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<div class="black-glass">
+					<p style="letter-spacing: 3px;font-size: 2em;padding:10px;text-align: center;font-family: Verdana;color: black;">
+						<b>CLINICAL STUDY DASHBOARD</b>
+					</p>
+				</div>
+				<div class="black-glass pad20" style="margin-top:20px;">
+					<br />
+					<div id="alertdiv" align='center'></div>
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 ">
+							<div class="form-group">
+								<label for="feedback_title">First Name</label>
+								<input type="text" name="first_name" id="first_name"
+								class="form-control input-md" placeholder="FirstName">
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 ">
+							<div class="form-group">
+								<label for="feedback_title">Last Name</label>
+								<input type="text" name="last_name" id="last_name" class="form-control input-md" placeholder="LastName">
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="feedback_title">Email</label>
+						<input type="email" name="email" id="email" class="form-control input-md" placeholder="Email">
+					</div>
+
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 ">
+							<div class="form-group">
+								<label for="feedback_title">Password</label>
+								<input type="password" name="password" id="password"
+								class="form-control input-md" placeholder="Password">
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 ">
+							<div class="form-group">
+								<label for="feedback_title">Confirm</label>
+								<input type="password" name="password_confirmation"
+								id="password_confirmation" class="form-control input-md"
+								placeholder="Confirm Password">
+							</div>
+						</div>
+					</div>
+					<p class="text-center" style="font-size: 10px;color: black;">
+						<br />
+						By clicking Join now, you agree to iNDx TECHNOLOGY INC.
+						<br />
+						<b>Privacy
+						Policy</b> and <b>User Agreement</b>
+						<br />
+						<br />
+					</p>
+
+					<a id="join_button" class="btn btn-primary btn-block">
+						Join Now
+					</a>
+					<br />
+					<p class="text-center" style="color: black;">
+						Already have an account? <a href="#/login" onclick="$('body').trigger('login-screen');">Sign in</a>
+					</p>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</form>
+<script type="text/javascript">
+	$(function(){
+		$("#menubutton").hide();
+		$("#homebutton").hide();
+		$("#top-right-holder").hide();
+	});
+</script>

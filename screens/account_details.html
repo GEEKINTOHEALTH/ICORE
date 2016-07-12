@@ -1,0 +1,68 @@
+<div class="container animated fadeInUp" style="margin-top: 20px;">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="main-div-wrapper card-2">
+				<form id="photoupload_form">
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6">
+							<div class="form-group pull-center">
+								<p class="profile-data" style="margin-top: 10px;">
+									<span>Director:</span>
+									John Smith
+									<br/>
+									<span>Hospital:</span>
+									M.D. Anderson Cancer Center
+									<br/>
+									<span>Title:</span>
+									Program Manager: Cancer Immunotherapy Treatment
+									<br/>
+									<span>Current Program:</span>
+									<a onclick="$('body').trigger('study-details');">
+										Cancer Immunotherapy Treatment
+									</a>
+								</p>
+							</div>
+
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6">
+							<div class="form-group pull-center">
+								<div id="preview_frame" style="border:1px solid silver;margin:0px 2px;height:200px;width:200px;background-size:cover">
+									<img src="https://randomuser.me/api/portraits/men/29.jpg" style="width: inherit;"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<hr>
+				<form id="profile_form">
+					<input type="hidden" name="token" id="token" >
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6">
+							<div class="form-group">
+								<input type="text" name="first_name" id="first_name" class="form-control input-md" placeholder="enter your firstname" value="John">
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6">
+							<div class="form-group">
+								<input type="text" name="last_name" id="last_name" class="form-control input-md" placeholder="enter your lastname" value="Smith">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<input type="text" name="hospital" id="hospital" class="form-control input-sm" placeholder="your hospital" value="M.D. Anderson Cancer Center">
+					</div>
+					<div class="form-group">
+						<input type="text" name="hospital" id="hospital" class="form-control input-sm" placeholder="your role & treatment name" value="rogram Manager: Cancer Immunotherapy Treatment">
+					</div>
+					<div class="form-group">
+						<input type="text" name="hospital" id="hospital" class="form-control input-sm" placeholder="your treatment name" value="Cancer Immunotherapy Treatment">
+					</div>
+					<a class="btn btn-primary btn-block"> Update </a>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+  $(function(){});
+</script>

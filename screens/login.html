@@ -1,0 +1,134 @@
+<style type="text/css" media="screen">
+	#loginbg {
+		background: linear-gradient(rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0.1)), url(img/loginbg.jpg) no-repeat center center;
+		background-size: cover;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		width: 100%;
+		height: 100%;
+		top: 0px;
+		left: 0px;
+		bottom: 0px;
+		right: 0px;
+		position: absolute;
+	}
+</style>
+<div id="loginbg">
+	<form id="login_form" action="">
+		<div class="container animated fadeInUp" style="margin-top:20px;">
+			<div class="row">
+				<h1 class="text-center">&nbsp;</h1>
+				<div class="col-sm-8 col-sm-offset-2">
+					<div class="pad20" style="margin-top:20px;width:400px;margin:auto;background: rgba(255,255,255,0.7)">
+						<br/>
+						<div id="alertdiv" align='center'></div>
+						<div class="form-group">
+							<label for="feedback_title">Email</label>
+							<input type="email" name="email" id="email" class="form-control input-md" placeholder="Email Address">
+						</div>
+						<div class="form-group">
+							<label for="feedback_title">Password</label>
+							<input type="password" name="password" id="password" class="form-control input-md" placeholder="Password">
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group">
+									<select id="select_login" class="form-control">
+										<option value="">Choose Login</option>
+										<option value=""> Login As Admin</option>
+										<option value="bioinformatician"> Login As BioInformation</option>
+										<option value=""> Login As Clinician</option>
+										<option value="director"> Login As Director</option>
+										<option value="patient"> Login As Patient</option>
+										<option value="researcher"> Login As Researcher</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-sm-12 text-center">
+								<a class="btn btn-default" onclick="$('body').trigger('register-screen')">Signup</a>
+							</div>
+						</div>
+					</div>
+
+					<div class=" pad20" style="margin-top:120px;width:400px;margin:auto;background: rgba(255,255,255,0.7)">
+
+						<p style="letter-spacing: 2px;font-size: .7em;padding:10px;text-align: center;color: black;font-weight: bold;">
+							Copyright 2016. iNDx TECHNOLOGY INC.
+							<br />
+							Privacy Policy <b>|</b> Terms & conditions <b>|</b><a href="#/forgot-password" style="font-size: 1.1em;color: black;">Forgot password?</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" charset="utf-8">
+	$(function() {
+
+		$("#menubutton").hide();
+		$("#homebutton").hide();
+		$("#top-right-holder").hide();
+		$("#title_text").html("ICORE");
+
+		$("#select_login").on('change', function() {
+			//console.log('login candidate == ' + this.value);
+			if (this.value) {
+				LS.set_data('LOGGEDINUSER', this.value);
+				$('#menu-div').html(prepareHtml('menu-template')(getMenuInfo(this.value)));
+				window.location.href = "#/" + this.value + "-home";
+			}
+		});
+
+		/*$('#login_form').validate({
+		 rules : {
+		 email : {
+		 minlength : 3,
+		 maxlength : 50,
+		 required : true,
+		 email : true
+		 },
+		 password : {
+		 required : true,
+		 minlength : 1
+		 }
+		 },
+		 highlight : function(element) {
+		 $(element).closest('.form-group').addClass('has-error');
+		 },
+		 unhighlight : function(element) {
+		 $(element).closest('.form-group').removeClass('has-error');
+		 },
+		 errorElement : 'span',
+		 errorClass : 'help-block',
+		 errorPlacement : function(error, element) {
+		 if (element.parent('.input-group').length) {
+		 error.insertAfter(element.parent());
+		 } else {
+		 error.insertAfter(element);
+		 }
+		 },
+		 submitHandler : function(form) {
+
+		 var options = {
+		 url : base + '/login',
+		 method : 'POST',
+		 contentType : "text/plain",
+		 success : function(response) {
+		 var tokenString;
+		 if (response.ack === 'success') {
+		 tokenString = response.tokenId;
+		 window.location.href = "#/home";
+		 } else if (response.ack === 'error') {
+		 $('#alertdiv').addClass("alert alert-danger").html(' Username And Password Wrong');
+		 }
+		 localStorage.SESSION_TOKEN = tokenString;
+		 }
+		 };
+		 $(form).ajaxSubmit(options);
+
+		 }
+		 }); */
+	}); 
+</script>

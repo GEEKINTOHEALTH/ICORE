@@ -1,0 +1,183 @@
+<style type="text/css" media="screen">
+	#selectdate {
+		margin-bottom: 10px;
+		color: white;
+		border: none;
+		/*background-color:rgba(0,51,102,0.6);*/
+		background-color: rgb(220, 38, 10);
+		z-index: 9999;
+		width: 100px;
+	}
+
+	.popover-content {
+		background: #f5f5f5;
+	}
+
+	/**search item**/
+	.form-control1 {
+		width: 120px;
+	}
+	.popover {
+		max-width: 400px;
+	}
+	.vis-item-content > span {
+		float : left;
+		font-size: 10px;
+	}
+	.vis-item.green {
+		background-color: #109618;
+		border-color: #109618;
+	}
+	.vis-item.red {
+		background-color: #dc3912;
+		border-color: #dc3912;
+	}
+	.vis-item.blue {
+		background-color: #3366CC;
+		border-color: #3366CC;
+	}
+	
+	.vis-item.vis-box {
+		padding : 2px 0px;
+	}
+</style>
+<div class="container animated fadeInUp" style="margin-top: 20px;">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="table-wrapper card-2">
+				<div align="right" id="toolbar">
+					<!-- button style="border:none;background: transparent;" id="searchevent" data-toggle="popover">
+					<i class="fa fa-2x fa-search"></i>
+					</button>
+					<div id="popover-content" class="hide">
+					<form class="form-inline"  id="search_form">
+					<div class="form-group">
+					<input class="form-control form-control1 text-center" id="str" name="str" type="text" placeholder="keywords" />
+					<input class="btn btn-primary btn-sm" id="ItemSearchButton" type="submit" value="Search" />
+					</div>
+					<div id="alert"></div>
+					</form>
+					</div>
+					<input type="text" id="selectdate" name="selectdate" class="btn btn-primary btn-outline btn-sm" data-date-format="yyyy-mm-dd" placeholder="Select Day" -->
+					<input type="hidden" id="focus" checked>
+					<button style="border:none;background: transparent;" id="moveLeft">
+						<i class="fa fa-2x fa-arrow-circle-left"></i>
+					</button>
+					<button style="border:none;background: transparent;" id="moveRight">
+						<i class="fa fa-2x fa-arrow-circle-right"></i>
+					</button>
+					<!-- button style="border:none;background: transparent;" id="zoomIn">
+					<i class="fa fa-2x fa-search-plus"></i>
+					</button>
+					<button style="border:none;background: transparent;" id="zoomOut">
+					<i class="fa fa-2x fa-search-minus"></i>
+					</button -->
+				</div>
+				<br/>
+				<br/>
+				<br/>
+				<div id="visualization"></div>
+
+			</div>
+			<br/>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(function() {
+		$('#searchevent').popover({
+			placement : 'bottom',
+			//title : 'Enter search string in Title or Description',
+			html : true,
+			content : $('#popover-content').html()
+		}).on('click', function() {
+			$('#ItemSearchButton').click(function() {
+				if ($('#str').val()) {
+					var string = $('#str').val();
+					//searchitem(string);
+					return false;
+				} else {
+					$('#alert').addClass("alert alert-danger").html('Value required');
+					return false;
+				}
+			});
+		});
+
+		// move timeline to selected date
+		var dp = $('#selectdate').datepicker();
+		dp.on('changeDate', function(e) {
+			dp.datepicker('hide');
+			timeline.setWindow({
+				start : e.date,
+				end : new Date((e.date).getTime() + (1 * 24 * 60 * 60 * 1000))
+			});
+		});
+
+		$('#selectdate').focus(function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			this.blur();
+		});
+
+		var items = [];
+		var treatments = db2.getCollection('TREATMENT').findObjects({
+			patientid : 'PID2',
+			planneddose : {
+				$ne : 'NA'
+			}
+		});
+		treatments.forEach(function(treatment) {
+			items.push({
+				item : '<span><b>Treatment : </b></span><br>' + '<span>' + treatment.treatment + '</span>',
+				start : treatment.startdate,
+				className : 'blue'
+			});
+		});
+
+		treatments.forEach(function(treatment) {
+			items.push({
+				item : '<span><b>Intervention : </b></span><br>' + '<span>' + treatment.intervention + '</span>',
+				start : treatment.startdate,
+				className : 'green'
+			});
+		});
+
+		var adverseEvents = db2.getCollection('ADVERSEVENT').findObjects({
+			pid : 'PID- 2'
+		});
+		//console.log(JSON.stringify(adverseEvents, null, 2));
+
+		adverseEvents.forEach(function(adverseEvent) {
+			items.push({
+				item : '<span><b>Adverse Event : </b></span><br>' + '<span>' + adverseEvent.adverseevent + '</span>',
+				start : adverseEvent.onsetdate,
+				className : 'red'
+			});
+		});
+
+		//timeline
+		var arr = [],
+		    TARGETID,
+		    count = 1;
+		$.each(items, function(index, data) {
+			obj_array = {};
+			obj_array['id'] = index + 1;
+			obj_array['content'] = data.item;
+			obj_array['start'] = data.start;
+			obj_array['className'] = data.className;
+			arr.push(obj_array);
+		});
+
+		var container = document.getElementById('visualization');
+		var items = new vis.DataSet(arr);
+		render_timeline(items, container);
+		
+		$("#moveLeft").click(function() {
+			movefocus(-1);
+		});
+		$("#moveRight").click(function() {
+			movefocus(1);
+		});
+	}); 
+</script>

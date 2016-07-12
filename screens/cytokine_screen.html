@@ -1,0 +1,115 @@
+<div class="container animated fadeInUp" style="margin-top: 20px;">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-wrapper card-2">
+                <div style="display:inline;">
+                    <div class="input-group">
+                        <span class="input-group-addon">Filter</span>
+                        <input id="filter" type="text" class="form-control" placeholder="Type here...">
+                    </div>
+                    <div class="pull-right pg-holder" style="margin-top:5px;margin-bottom: 5px;">
+                        <button class="btn btn-default btn-sm" id="pg-left">
+                            <i class="fa fa-angle-left fa-2x" aria-hidden="true"></i>
+                        </button>
+                        <button class="btn btn-default  btn-sm" id="pg-right">
+                            <i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <table class="sortable table-bordered  table-condensed cf table-hover" width="100%">
+                    <thead class="cf" style="background:#ffe5e5;">
+                        <tr>
+                            <th width="1%">
+                                CPAN
+                            </th>
+                            <th>
+                                SCTP
+                            </th>
+                            <th>
+                                MARKER
+                            </th>
+                            <th>
+                                RESULT
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="cytokinelist-data" class="searchable">
+                    </tbody>
+                </table>
+            </div>
+            <br/>
+        </div>
+    </div>
+</div>
+<script id='cytokine-data' type="text/template">
+    {{#rows}}
+    <tr style="padding: 20px;">
+        <td style="text-align: right" data-title="CPAN">
+            {{cpan}}
+        </td>
+        <td style="text-align: right" data-title="SCTP">
+            {{sctp}}
+        </td>
+        <td style="text-align: left" data-title="MARKER">
+            {{marker}}
+        </td>
+        <td style="text-align: right" data-title="RESULT">
+            {{result}}
+        </td>
+    </tr>
+    {{/rows}}
+</script>
+<script>
+    $(function(){
+        //start of pagination relevant rendering logic
+        
+        function render_table(rows){
+            var cytokineTemplate = $('#cytokine-data').html();
+            var cytokenHtml = Mustache.to_html(cytokineTemplate, {
+                'rows': rows
+            });
+            $("#cytokinelist-data").html(cytokenHtml);
+            $.bootstrapSortable(applyLast = true);
+        }
+        
+        
+        var pageHitCount = 1, startRange = 0, qry = {};
+       	if ($('#select-pid').val()) 
+            qry.cpan = $('#select-pid').val();
+        var rows = db2.getCollection('CYTOKINE').findObjects(qry);
+        
+        //if total rows count is less than 50,pagination not required
+        if (rows.constructor === Array && rows.length <= 50) {
+             $('.pg-holder').hide();
+            render_table(rows);
+        } else {
+            render_table(onLeft(rows, startRange, pageHitCount));
+        }
+        
+        $('#pg-left').click(function(){
+            pageHitCount = pageHitCount - 1;
+            startRange = startRange - 50;
+            render_table(onLeft(rows, startRange, pageHitCount));
+        });
+        
+        $('#pg-right').click(function(){
+            pageHitCount = pageHitCount + 1;
+            startRange = startRange + 50;
+            render_table(onRight(rows, startRange, pageHitCount));
+        });
+        
+        render_table(onLeft(rows, startRange, pageHitCount));
+        
+        //end of pagination relevant rendering logic
+        
+        $('#filter').keyup(function(){
+            var rex = new RegExp($(this).val(), 'i');
+            $('.searchable tr').hide();
+            $('.searchable tr').filter(function(){
+                return rex.test($(this).text());
+            }).show();
+        });
+    });
+</script>

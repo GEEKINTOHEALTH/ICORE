@@ -1,0 +1,159 @@
+<div class="container animated fadeInUp">
+    <div class="row">
+        <form id="patient_form">
+            <div class="col-md-12">
+                <br/>
+                <h4 style="color: white;letter-spacing: 3px;">PERSONAL INFORMATION</h4>
+                <br/>
+                <div class="black-glass form-holder">
+                    <div id="alertdiv" align='center'>
+                    </div>
+                    <input type="hidden" name="token" id="token">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="firstname">
+                                    First Name
+                                </label>
+                                <input type="firstname" name="firstname" id="firstname" class="form-control input-md" placeholder="Enter first name">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="middlename">
+                                    Middle Name
+                                </label>
+                                <input type="middlename" name="middlename" id="middlename" class="form-control input-md" placeholder="Enter middlename name">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="lastname">
+                                    Last Name
+                                </label>
+                                <input type="lastname" name="lastname" id="lastname" class="form-control input-md" placeholder="Enter last name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row topmargin25">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="gender">
+                                    Gender
+                                </label>
+                                <select class="form-control input-md" data-width="160px" id="gender" name="gender">
+                                    <option selected="selected" value="">Select Gender</option>
+                                    <option value="male">MALE</option>
+                                    <option value="female">FEMALE</option>
+                                    <option value="others">OTHERS</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="height">
+                                    Height
+                                </label>
+                                <input type="height" name="height" id="height" class="form-control input-md" placeholder="Enter height">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="weight">
+                                    Weight
+                                </label>
+                                <input type="weight" name="weight" id="weight" class="form-control input-md" placeholder="Enter weight">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group topmargin25">
+                        <label for="feedback_date">
+                            Date of Birth
+                        </label>
+                        <input type="text" id="dob" name="dob" class="form-control input-md" data-date-format="yyyy-mm-dd" placeholder="Date of Birth">
+                    </div>
+                    <div class="form-group topmargin25">
+                        <label for="feedback_title">
+                            Place of Birth
+                        </label>
+                        <input type="pob" name="pob" id="pob" class="form-control input-md" placeholder="Place Of Birth">
+                    </div>
+                </div>
+                <br/>
+                <h4 style="color: white;letter-spacing: 3px;">CONTACT INFORMATION</h4>
+                <br/>
+                <div class="black-glass form-holder">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="phoneone">
+                                    Contact Phone 1
+                                </label>
+                                <input type="phoneone" name="phoneone" id="phoneone" class="form-control input-md" placeholder="Enter contact number">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="phonetwo">
+                                    Contact Phone 1
+                                </label>
+                                <input type="phonetwo" name="phonetwo" id="phonetwo" class="form-control input-md" placeholder="Enter contact number">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <br/>
+                        <label for="email">
+                            EMail
+                        </label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <br/>
+                        <label for="address">
+                            Address
+                        </label>
+                        <input type="address" name="address1" id="address1" class="form-control" placeholder="address 1"><input style="margin-top:5px;" type="address" name="address2" id="address2" class="form-control" placeholder="address 2">
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="city">
+                                    Town/City
+                                </label>
+                                <input type="text" name="city" id="city" class="form-control" placeholder="city">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="state">
+                                    State
+                                </label>
+                                <input type="text" name="state" id="state" class="form-control" placeholder="state">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="zip">
+                                    Zip
+                                </label>
+                                <input type="text" name="zip" id="zip" class="form-control" placeholder="zip">
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <button id="join_button" type="submit" value="save" class="btn btn-primary btn-block">
+                        SAVE PROFILE
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+
+	}); 
+</script>

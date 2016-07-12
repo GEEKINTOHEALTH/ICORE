@@ -1,0 +1,49 @@
+<div>
+	<table class="sortable table-bordered  table-condensed cf table-hover" width="100%">
+		<thead class="cf" style="background:#ffe5e5;">
+			<tr>
+				<th> ID </th>
+				<th> STUDY </th>
+				<th> TITLE </th>
+				<th> ASSIGNED </th>
+				<th> STATUS </th>
+				<th> VIEW </th>
+			</tr>
+		</thead>
+		<tbody id="study-list"></tbody>
+	</table>
+</div>
+<script id='study-template' type="text/template">
+	{{#rows}}
+	<tr style="padding: 20px;">
+	<td style="text-align: right" data-title="ID">
+	{{studyid}
+	</td>
+	<td style="text-align: right" data-title="STUDY">
+	{{studyid}
+	</td>
+	<td style="text-align: right" data-title="TITLE">
+	{{studytitle}}
+	</td>
+	<td style="text-align: left" data-title="ASSIGNED">
+	</td>
+	<td style="text-align: left" data-title="STATUS">
+	</td>
+	<td style="text-align: left" data-title="VIEW">
+	{{startdate}}
+	</td>
+	</tr>
+	{{/rows}}
+</script>
+<script>
+	$(function() {
+		function renderStudyList(rows) {
+			var StudyTemplate = $('#study-template').html();
+			var StudyHtml = Mustache.to_html(StudyTemplate, {
+				'rows' : rows
+			});
+			$("#study-list").html(StudyHtml);
+			$.bootstrapSortable( applyLast = true);
+		}
+	}); 
+</script>

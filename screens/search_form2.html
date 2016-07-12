@@ -1,0 +1,104 @@
+<div class="col-md-7 col-md-offset-2" style="border: 2px solid rgba(140, 140, 165, 0.3);">
+	<div class="query-holder">
+		<div class="row">
+			<div class="col-sm-3 col-md-3 col-xs-3">
+				<select class="form-control" name="tests">
+					<option value="">Select Test</option>
+					<option value="1">IHC</option>
+					<option value="2">Cytokine</option>
+					<option value="3">FlowCytoMetry</option>
+				</select>
+			</div>
+			<div class="col-sm-3 col-md-3 col-xs-3">
+				<select class="form-control" name="markers">
+					<option value="">Select Marker</option>
+					<option value="1">CD3</option>
+					<option value="2">CD4</option>
+					<option value="3">CD8</option>
+				</select>
+			</div>
+			<div class="col-sm-3 col-md-2 col-xs-2">
+				<select class="form-control" name="conditions">
+					<option value="">Select Operator</option>
+					<option value="1">&lt;</option>
+					<option value="2">&gt;</option>
+					<option value="3">=</option>
+				</select>
+			</div>
+			<div class="col-sm-3 col-md-3 col-xs-3">
+				<input class="form-control" type="text" placeholder="Type something" />
+			</div>
+			<div class="col-sm-1 col-md-1 col-xs-1">
+				<button class="form-control btn btn-success" type="button">
+					<i class="fa fa-plus"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="query-holder">
+		<div class="row">
+			<div class="col-sm-5 col-md-5 col-xs-5">
+				<select class="form-control" name="study">
+					<option value="">Select Study</option>
+				</select>
+			</div>
+			<div class="col-sm-6 col-md-6 col-xs-6">
+				<select class="form-control" name="cancer_type">
+					<option value="">Select CancerType</option>
+				</select>
+
+			</div>
+			<div class="col-sm-1 col-md-1 col-xs-1">
+				<button class="form-control btn btn-success" type="button">
+					<i class="fa fa-plus"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="query-holder">
+		<div class="row">
+			<div class="col-sm-4 col-md-4 col-xs-4">
+				<select class="form-control" name="age">
+					<option value="">Select Age</option>
+				</select>
+			</div>
+			<div class="col-sm-4 col-md-4 col-xs-4">
+				<select class="form-control" name="gender">
+					<option value="">Select Gender</option>
+				</select>
+
+			</div>
+			<div class="col-sm-4 col-md4 col-xs-4">
+				<select class="form-control" name="gender">
+					<option value="">Select Race</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 10px;">
+		<div class="col-sm-6 col-md-6">
+			<button class="btn btn-default" type="button">
+				<i class="fa fa-check" style="color: black;"></i>&nbsp;SAVE
+			</button>
+		</div>
+		<div class="col-sm-6 col-md-6">
+			<button class="btn btn-default" type="button">
+				<i class="fa fa-search" style="color: black;"></i>&nbsp;SEARCH
+			</button>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		$('.btn-success').on('click', function() {
+			var template = $(this).closest('.row').html().replace('btn-success', 'btn-danger').replace('fa-plus', 'fa-minus');
+			$(this).closest('.query-holder').append('<div class="row slideInDown animated">' + template + '</div>');
+		});
+		$('body').on('click', '.btn-danger', function() {
+			$(this).closest('.row').addClass('slideOutUp animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+				$(this).remove();
+			});
+		});
+	}); 
+</script>

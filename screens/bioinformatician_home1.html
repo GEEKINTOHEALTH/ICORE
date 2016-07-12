@@ -1,0 +1,23 @@
+<div class="container animated fadeInUp" style="margin-top: 20px;">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="main-div-wrapper card-2">
+				<div style="display: inline">
+					<a class="btn btn-primary disabled" id="bio-research-req-id"  onclick="$('body').trigger('bio-research-req-view')">Research Requests</a>
+					<a class="btn btn-primary" id="restapi-explorer-id"  onclick="$('body').trigger('rest-api-explorer');">REST API Explorer</a>
+				</div>
+				<div id="bio-research-request" style="margin-top: 40px;">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+  $(function(){
+  		$("#menubutton").show();
+  	    $("#homebutton").show();
+		$("#top-right-holder").show();
+  		$('#bio-research-request').load('screens/bio_view_research_requests.html');
+  });
+</script>

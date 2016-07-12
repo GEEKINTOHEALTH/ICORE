@@ -1,0 +1,335 @@
+<div class="container animated fadeInUp" style="margin-top: 20px;">
+
+	<!-- div class="row" style="margin-top: 15px;">
+	<div class="col-sm-12">
+	<div class="card-panel pull-right text-right">
+	<p class="hospital-data" onclick="$('body').trigger('study-details');">
+	<br>
+	<span>Current Program:</span>
+	Cancer Immunotherapy Treatment
+	</p>
+	</div>
+	<div class="card-1" style="background: white;padding: 10px">
+	<table border="0">
+	<tr>
+	<td width="90px" align="center" valign="middle"><img src="https://randomuser.me/api/portraits/men/29.jpg" width="90"></td>
+	<td  width="90%" style="padding:10px;padding-left: 20px;" align="center">
+	<p class="profile-data text-left" style="margin-top: 10px;">
+	<span>Director:</span>
+	John Smith
+	<br/>
+	<span>Hospital:</span>
+	M.D. Anderson Cancer Center
+	<br/>
+	<span>Title:</span>
+	Program Manager: Cancer Immunotherapy Treatment
+	<br/>
+	</p></td>
+	</tr>
+	</table>
+	</div>
+	</div>
+	</div -->
+
+	<div class="row">
+		<div class="col-sm-12" align="center">
+			<h4>Director Dashboard</h4>
+			<div class="summary-charts" id="adverse_events"></div>
+		</div>
+		<div class="col-sm-3" align="center">
+			<h4>Study Status</h4>
+			<div class="summary-charts" id="study_status"></div>
+		</div>
+		<div class="col-sm-3" align="center">
+			<h4>Study Participants</h4>
+			<div class="summary-charts" id="study_participants"></div>
+		</div>
+		<div class="col-sm-3" align="center">
+			<h4>Demographic</h4>
+			<div class="summary-charts" id="demographic_ratio" ></div>
+		</div>
+		<div class="col-sm-3" align="center">
+			<h4>Gender Ratio</h4>
+			<div class="summary-charts" id="gender_ratio"></div>
+		</div>
+		<div class="col-xs-12">
+			<div class="table-wrapper card" style="margin-top: 25px;">
+				<table class="sortable table-bordered  table-condensed cf table-hover" width="100%">
+					<thead class="cf" style="background:#ffe5e5;">
+						<tr>
+							<th> STUDY ID </th>
+							<th> NCT-NUMBER </th>
+							<th> TITLE </th>
+							<th> PHASE </th>
+							<th> STATUS </th>
+							<th> START DATE </th>
+							<th> END DATE </th>
+						</tr>
+					</thead>
+					<tbody id="study-list"></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script id='study-template' type="text/template">
+	{{#rows}}
+	<tr style="padding: 20px;">
+	<td style="text-align: center" data-title="STUDYID">
+	<a class="btn btn-default" onclick="$('body').trigger('full-study-view',['{{studyid}}']);">{{studyid}}</a>
+	</td>
+	<td style="text-align: center" data-title="NCTNO">
+	{{ctorgid}}
+	</td>
+	<td style="text-align: left" data-title="STUDYTITLE">
+	{{studytitle}}
+	</td>
+	<td style="text-align: left" data-title="PHASE">
+	{{phase}}
+	</td>
+	<td style="text-align: left" data-title="STATUS">
+	{{status}}
+	</td>
+	<td style="text-align: left" data-title="STARTDATE">
+	{{startdate}}
+	</td>
+	<td style="text-align: right" data-title="ENDDATE">
+	{{completiondate}}
+	</td>
+	</tr>
+	{{/rows}}
+</script>
+
+<script type="text/javascript">
+	$(function() {
+		$("#homebutton").show();
+		$("#top-right-holder").show();
+		
+		function renderStudyList(rows) {
+			var StudyTemplate = $('#study-template').html();
+			var StudyHtml = Mustache.to_html(StudyTemplate, {
+				'rows' : rows
+			});
+			$("#study-list").html(StudyHtml);
+			$.bootstrapSortable( applyLast = true);
+		}
+
+		function bootsrapPageRendering() {
+			var rows = db2.getCollection('STUDIES').findObjects({'studyid' : {$ne : ""}});
+			renderStudyList(rows);
+		}
+
+		if (!localStorage.getItem('DATASOURCES')) {
+			setTimeout(function() {bootsrapPageRendering();}, 10000);
+			return;
+		}
+		bootsrapPageRendering();
+
+		var Options = jQuery.extend(true, {
+			chartArea : {
+				left : 0,
+				right : 0,
+				top : 5,
+				bottom : 50
+			},
+			width : '100%',
+			height : '100%',
+			legend : {
+				position : "bottom",
+				textStyle : {
+					fontSize : 12
+				}
+			},
+			pieHole : 0.4,
+			pieSliceText : 'value'
+		}, options);
+
+		var pieChart;
+
+		function drawGender(pieData) {
+			pieChart = new google.visualization.PieChart(document.getElementById('gender_ratio'));
+			pieChart.draw(pieData, Options);
+			$(window).smartresize(function() {
+				pieChart.draw(pieData, Options);
+			});
+		};
+		
+		function drawAdverse(columnData, titleData) {
+			
+			var studies = db2.getCollection('STUDIES').findObjects({studyid : {$ne : ""}});
+			var studyIds = [], adverseEvents = [10, 20, 30, 40, 45, 50, 55, 60, 70, 80], averageGrade = [], targetEnrollment = [], enrollment = [];
+			var colors = ['#dc3912', '#3366CC', '#109618', '#ff9900'];
+			
+			//column chart related options
+			var columnOptions = {
+				chartArea : {
+					left : 40,
+					right : 0,
+					top : 5,
+					bottom : 50
+				},
+				width : '100%',
+				height : '100%',
+				colors : colors,
+				focusTarget : 'category',
+				tooltip : {
+					isHtml : true
+				},
+				hAxis : {
+					titleTextStyle : {
+						color : 'black',
+						bold : true,
+						italic : false
+					},
+					textPosition : 'center'
+				},
+				legend : {
+					position : 'none',
+					textStyle : {
+						fontSize : 12
+					}
+				}
+			};
+			
+			// preparing data table for chart
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'STUDY ID');
+			data.addColumn({
+					'type' : 'string',
+					'role' : 'tooltip',
+					'p' : {
+						'html' : true
+					}
+			});
+			data.addColumn('number', 'Adverse Events');
+			data.addColumn('number', 'Target Recuirtment');
+			data.addColumn('number', 'Recuirtment');
+			data.addColumn('number', 'Average Grade');
+			
+			function customTooltip(data){
+				var html = '<div style="text-align:left;margin-left:10px;width:100%">';
+				for(var i = 0; i < data.length; i++){
+					html += '<span style="color:' + data[i].color + ';padding:0;text-align:left;font-weight:bold;font-size:10px;">' + data[i].name + ': </span><span style="float:right;padding-right:20px;"><b>' + data[i].value + '</b></span><br/>';
+				}
+				html += '</div>';
+				return html;
+			}
+			
+			for(var i =0; i < 9; i++){
+				var study = studies[i];
+				var tooltipData = [{
+					'name' : 'Adverse Event',
+					'value': adverseEvents[i],
+					'color': colors[0]
+				},{
+					'name' : 'Target Enrollment',
+					'value': (isNaN(study.targetenrollment)? 0 : Number(study.targetenrollment)),
+					'color': colors[1]
+				},{
+					'name' : 'Enrollment',
+					'value': (isNaN(study.enrollment)? 0 : Number(study.enrollment)),
+					'color': colors[2]
+				},{
+					'name' : 'Average Grade',
+					'value': (isNaN(study.averagegrade)? 0 : Number(study.averagegrade)),
+					'color': colors[3]
+				}];
+				
+				data.addRow([study.studyid, customTooltip(tooltipData), adverseEvents[i], (isNaN(study.targetenrollment)? 0 : Number(study.targetenrollment)), (isNaN(study.enrollment)? 0 : Number(study.enrollment)), (isNaN(study.averagegrade)? 0 : Number(study.averagegrade))]);
+				//adverseEvents.push((isNaN(study.adverseevents))? 0 : Number(study.adverseevents));
+			}
+			
+			//creating and drawing chart
+			var columnChart = new google.visualization.ColumnChart(document.getElementById('adverse_events'));
+			columnChart.draw(data, columnOptions);
+			
+			//showing full study view by clicking bars in charts
+			google.visualization.events.addListener(columnChart, 'select', function() {
+				var selectedItem = columnChart.getSelection()[0];
+				if (selectedItem) {
+					var studyId = data.getValue(selectedItem.row, 0);
+					var total = data.getValue(selectedItem.row, 1);
+					$('body').trigger('full-study-view', [studyId]);
+				}
+			});
+			
+			//redrawing when window resized
+			$(window).smartresize(function() {
+				columnChart.draw(data, columnOptions);
+			});
+		};
+		function drawDemographic(pieData) {
+			pieChart = new google.visualization.PieChart(document.getElementById('demographic_ratio'));
+			pieChart.draw(pieData, Options);
+			$(window).smartresize(function() {
+				pieChart.draw(pieData, Options);
+			});
+		};
+		function drawStudy(pieData) {
+			pieChart = new google.visualization.PieChart(document.getElementById('study_status'));
+			pieChart.draw(pieData, Options);
+			$(window).smartresize(function() {
+				pieChart.draw(pieData, Options);
+			});
+		};
+		function drawParticipants(pieData) {
+			pieChart = new google.visualization.PieChart(document.getElementById('study_participants'));
+			pieChart.draw(pieData, Options);
+			$(window).smartresize(function() {
+				pieChart.draw(pieData, Options);
+			});
+		};
+
+		function getGender() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Name');
+			data.addColumn('number', 'Value');
+			data.addRow(["Male", 230]);
+			data.addRow(["Female", 295]);
+
+			return data;
+		}
+
+		function getDemographic() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Ethnicity');
+			data.addColumn('number', 'Value');
+			data.addRow(["C", 520]);
+			data.addRow(["AA", 289]);
+			data.addRow(["A", 402]);
+			data.addRow(["H", 173]);
+			return data;
+		}
+
+		function getStudy() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Name');
+			data.addColumn('number', 'Value');
+			data.addRow(["Active - Recruiting", 3]);
+			data.addRow(["Active - Not Recruiting", 5]);
+			data.addRow(["Withdrawn", 1]);
+			data.addRow(["Complete", 12]);
+
+			return data;
+		}
+
+		function getParticipants() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Name');
+			data.addColumn('number', 'Value');
+			data.addRow(["Enrolled", 230]);
+			data.addRow(["To Be Enrolled", 295]);
+
+			return data;
+		}
+
+
+		google.charts.setOnLoadCallback(function() {
+			drawAdverse();
+			drawGender(getGender());
+			drawDemographic(getDemographic());
+			drawParticipants(getParticipants());
+			drawStudy(getStudy());
+		});
+	}); 
+</script>

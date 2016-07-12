@@ -1,0 +1,135 @@
+<style type="text/css">
+	.details_span {
+		background-color: #fff;
+		padding: 5px 20px;
+		font-size: 3em;
+		font-weight: 100;
+		font-family: 'Raleway', sans-serif;
+	}
+
+</style>
+<div class="container animated fadeInUp" style="margin-top: 20px;">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="table-wrapper card">
+				<table class="table ">
+					<thead>
+						<th>Completed Studies</th>
+						<th>Active Studies</th>
+						<th>Active Participants</th>
+						<th>Gender Ratio</th>
+						<th>Adverse Events</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td><span class="details_span">1</span></td>
+							<td><span class="details_span">4</span></td>
+							<td><span class="details_span">28</span></td>
+							<td><span class="details_span">19/9</span></td>
+							<td><span class="details_span">1</span></td>
+						</tr>
+					</tbody>
+				</table>
+				<br />
+				<div style="display:inline;">
+					<div class="pull-right pg-holder" style="margin-top:5px;margin-bottom: 5px;">
+						<button class="btn btn-default btn-sm" id="pg-left">
+							<i class="fa fa-angle-left fa-2x" aria-hidden="true"></i>
+						</button>
+						<button class="btn btn-default  btn-sm" id="pg-right">
+							<i class="fa fa-angle-right fa-2x" aria-hidden="true"></i>
+						</button>
+					</div>
+				</div>
+				<br>
+				<br>
+				<table class="sortable table-bordered  table-condensed cf table-hover" width="100%">
+					<thead class="cf" style="background:#ffe5e5;">
+						<tr>
+							<th> STUDYID </th>
+							<th> NCT-NUMBER </th>
+							<th> TITLE </th>
+							<th> PHASE </th>
+							<th> STATUS </th>
+							<th> STARTDATE </th>
+							<th> ENDDATE </th>
+						</tr>
+					</thead>
+					<tbody id="study-list"></tbody>
+				</table>
+			</div>
+			<br/>
+		</div>
+	</div>
+</div>
+<script id='study-template' type="text/template">
+	{{#rows}}
+	<tr style="padding: 20px;">
+	<td style="text-align: center" data-title="STUDYID">
+	<a class="btn btn-default" onclick="$('body').trigger('full-study-view',['{{studyid}}']);">{{studyid}}</a>
+	</td>
+	<td style="text-align: center" data-title="NCTNO">
+	{{ctorgid}}
+	</td>
+	<td style="text-align: right" data-title="STUDYTITLE">
+	{{studytitle}}
+	</td>
+	<td style="text-align: left" data-title="PHASE">
+	</td>
+	<td style="text-align: left" data-title="STATUS">
+	</td>
+	<td style="text-align: left" data-title="STARTDATE">
+	{{startdate}}
+	</td>
+	<td style="text-align: right" data-title="ENDDATE">
+	{{completiondate}}
+	</td>
+	</tr>
+	{{/rows}}
+</script>
+<script>
+	$(function() {
+		$('.pg-holder').hide();
+		function renderStudyList(rows) {
+			var StudyTemplate = $('#study-template').html();
+			var StudyHtml = Mustache.to_html(StudyTemplate, {
+				'rows' : rows
+			});
+			$("#study-list").html(StudyHtml);
+			$.bootstrapSortable( applyLast = true);
+		}
+
+		var qry = {
+					'studyid' : {
+						$ne : ""
+					}
+				},
+				rows = '',
+				pageHitCount = 1,
+				startRange = 0;
+		function bootsrapPageRendering() {
+			rows = db2.getCollection('STUDIES').findObjects(qry);
+			//if total rows count is less than 50,pagination not required
+			if (rows.constructor === Array && rows.length > 50) $('.pg-holder').show();
+			renderStudyList(onLeft(rows, startRange, pageHitCount));
+		}
+
+		if (!localStorage.getItem('DATASOURCES')) {
+			setTimeout(function() {bootsrapPageRendering();}, 10000);
+			return;
+		}
+		bootsrapPageRendering();
+
+		$('#pg-left').click(function() {
+			pageHitCount = pageHitCount - 1;
+			startRange = startRange - 50;
+			renderStudyList(onLeft(rows, startRange, pageHitCount));
+		});
+
+		$('#pg-right').click(function() {
+			pageHitCount = pageHitCount + 1;
+			startRange = startRange + 50;
+			renderStudyList(onRight(rows, startRange, pageHitCount));
+		});
+	});
+</script>

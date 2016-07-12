@@ -1,0 +1,82 @@
+<div class="container animated fadeInUp" style="margin-top: 20px;">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="table-wrapper card-2">
+				<div class="doc-head">
+					<a style="padding-left: 0px;">All</a>
+					<a>Admin</a>
+					<a>Lab</a>
+					<a>Scans</a>
+					<a>Reports</a>
+				</div>
+				<div class="pg-holder">
+					<button class="pull-left btn btn-default btn-sm" id="pg-left">
+						<i class="fa fa-arrow-left" aria-hidden="true"></i>
+					</button>
+					<button class="pull-right btn btn-default  btn-sm" id="pg-right">
+						<i class="fa fa-arrow-right" aria-hidden="true"></i>
+					</button>
+				</div>
+				<br>
+				<br>
+				<table class="sortable table-bordered  table-condensed table-hover" width="100%">
+					<thead style="background:#ffe5e5;">
+						<tr>
+							<th> START DATE </th>
+							<th> INTERVENTION </th>
+							<th> TREATMENT</th>
+							<th> DOSAGE </th>
+							<th> UNITS </th>
+							<th> ADMINISTERED BY </th>
+						</tr>
+					</thead>
+					<tbody id="medication-container">
+					</tbody>
+				</table>
+				<div class="row">
+					<div class="col-sm-6 col-md-6 bottom" style="text-align: center;">
+						<a class="btn btn-primary"> Share </a>
+					</div>
+					<div class="col-sm-6 col-md-6 bottom" style="text-align: center;">
+						<a class="btn btn-primary"> Contact </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script id='patient-medication-template' type="text/template">
+	{{#rows}}
+	<tr style="padding: 20px;">
+	<td style="text-align: center" data-title="START DATE">
+		{{startdate}}
+	</td>
+	<td style="text-align: left;padding-left: 10px;" data-title="INTERVENTION">
+		{{intervention}}
+	</td>
+	<td style="text-align: left;padding-left: 10px;" data-title="TREATMENT">
+		{{treatment}}
+	</td>
+	<td style="text-align: left;padding-left: 10px;" data-title="DOSAGE">
+		{{planneddose}}
+	</td>
+	<td style="text-align: center" data-title="UNITS">
+		{{unitperbasis}}
+	</td>
+	<td style="text-align: center" data-title="ADMINISTERED BY">
+		Hospital
+	</td>
+	</tr>
+	{{/rows}}
+</script>
+
+<script type="text/javascript">
+	$(function() {
+		$("#homebutton").show();
+		$("#top-right-holder").show();
+		var treatments = db2.getCollection('TREATMENT').findObjects({patientid : 'PID2', planneddose : {$ne : 'NA'}});
+		//console.log(JSON.stringify(treatments));
+		$('#medication-container').html(prepareHtml('patient-medication-template')(treatments));
+	}); 
+</script>

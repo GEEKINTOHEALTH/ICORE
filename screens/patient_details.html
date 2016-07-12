@@ -1,0 +1,255 @@
+<div class="container animated fadeInUp" style="margin-top: 20px;">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="card-1" style="background: white;height: 600px;">
+				 <table class="sortable table-bordered  table-condensed cf table-hover">
+				<div class="col-sm-6" align="left">
+					<p>
+					NAME
+					<br />
+
+					ADDRESS
+					<br />
+
+					TELEPHONE NUMBER
+					<br />
+
+					FAX NUMBER
+					<br />
+
+					MRN
+					<br />
+
+					HEALTHCARE CARD NUMBER
+					<br />
+
+					HEALTH PLAN BENEFICIARY
+					<br />
+
+					NUMBER
+					<br />
+
+					LICENSE PLATE NUMBER
+					<br />
+
+					EMAIL ADDRESS
+					<br />
+
+					PHOTOGRAPH
+					<br />
+
+					BIOMETRIC
+					<br />
+
+					SSN
+					<br />
+
+					SIN
+					<br />
+
+					IMPLANTED DEVICE NUMBER
+					<br />
+
+					GENDER
+					<br />
+
+					DOB
+					<br />
+
+					AGE
+					<br />
+
+					DOD
+					<br />
+
+					GEOGRAPHIC CODES
+					<br />
+
+					CENSUS GEOGRAPHY
+					<br />
+
+					GEO PROXIMITY
+					<br />
+
+					LANGUAGE SPOKEN
+					<br />
+
+					ETHNIC ORIGIN
+					<br />
+
+					YEARS OF SCHOOLING
+					<br />
+
+					MARITAL STATUS
+					<br />
+
+					CRIMINAL HISTORY
+					<br />
+
+					TOTAL INCOME
+					<br />
+
+					VISIBLE MINORITY STATUS
+					<br />
+
+					PROFESSION
+					<br />
+
+					EVENT DATES
+					<br />
+
+					CODES
+					<br />
+
+					COUNTRY OF BIRTH
+					<br />
+
+					BIRTH WEIGHT
+					<br />
+
+					BIRTH PLURALITY</p>
+				</div>
+				<div class="col-sm-6" align="left">
+					<p>
+						PRIMARY TUMOR
+						<br />
+
+						STAGE
+						<br />
+
+						METASTATIC
+						<br />
+
+						GENE MUTATION
+						<br />
+
+						CONSENT DATE
+						<br />
+
+						REGISTRATION DATE
+						<br />
+
+						PERFORMANCE STATUS
+						<br />
+
+						ON STUDY DATE
+						<br />
+
+						OFF STUDY DATE
+						<br />
+
+						OFF STUDY REASON
+						<br />
+
+						OFF STUDY COMMENT
+						<br />
+
+						RESPONSE
+						<br />
+
+						RESPONSE DATE
+						<br />
+
+						QA NOTE
+					</p>
+				</div>
+				</table>
+			</div>
+			<br/>
+		</div>
+	</div>
+</div>
+<script id='patient-data' type="text/template">
+	{{#rows}}
+	<tr style="padding: 20px;">
+	<td style="text-align: right" data-title="PAN">
+	{{pan}}
+	</td>
+	<td style="text-align: right" data-title="IPAN">
+	{{ipan}}
+	</td>
+	<td style="text-align: left" data-title="ICAN">
+	{{ican}}
+	</td>
+	<td style="text-align: right" data-title="YOB">
+	{{yob}}
+	</td>
+	<td style="text-align: right" data-title="DOB">
+	{{dob}}
+	</td>
+	<td style="text-align: left" data-title="GENDER">
+	{{gender}}
+	</td>
+	<td style="text-align: left" data-title="VITAL STATUS">
+	{{vitalstatus}}
+	</td>
+	<td style="text-align: right" data-title="DOD">
+	{{dod}}
+	</td>
+	<td style="text-align: left" data-title="RACE">
+	{{race}}
+	</td>
+	<td style="text-align: left" data-title="PRIMARY TUMOR">
+	{{primarytumor}}
+	</td>
+	<td style="text-align: left" data-title="STAGE">
+	{{stage}}
+	</td>
+	<td style="text-align: left" data-title="METASTATIC">
+	{{metastatic}}
+	</td>
+	<td style="text-align: left" data-title="GENEMUTATION">
+	{{genemutation}}
+	</td>
+	<td style="text-align: right" data-title="CONSENT DATE">
+	{{consentdate}}
+	</td>
+	<td style="text-align: right" data-title="REGISTRATION DATE">
+	{{registrationdate}}
+	</td>
+	<td style="text-align: left" data-title="PERFORMANCE STATUS">
+	{{performancestatus}}
+	</td>
+	<td style="text-align: right" data-title="ON STUDY DATE">
+	{{onstudydate}}
+	</td>
+	<td style="text-align: right" data-title="OFF STUDY DATE">
+	{{offstudydate}}
+	</td>
+	<td style="text-align: left" data-title="OFF STUDY REASON">
+	{{offstudyreason}}
+	</td>
+	<td style="text-align: left" data-title="OFF STUDY COMMENT">
+	{{offstudycomment}}
+	</td>
+	<td style="text-align: right" data-title="RESPONSE">
+	{{response}}
+	</td>
+	<td style="text-align: right" data-title="RESPONSE DATE">
+	{{responsedate}}
+	</td>
+	<td style="text-align: right" data-title="QA NOTE">
+	{{qanote}}
+	</td>
+	</tr>
+	{{/rows}}
+</script>
+<script>
+	$(function() {
+		function renderPatientInfo(rows) {
+			var PatientInfoTemplate = $('#patient-data').html();
+			var PatientInfoHtml = Mustache.to_html(PatientInfoTemplate, {
+				'rows' : rows
+			});
+			$("#patientlist-data").html(PatientInfoHtml);
+			$.bootstrapSortable( applyLast = true);
+		}
+
+		var pageHitCount = 1,
+		    startRange = 0,
+		    qry = {};
+		//var rows = db2.getCollection('SINGULAR_EVENT').findObjects(qry);
+
+		//renderPatientInfo(onLeft(rows, startRange, pageHitCount));
+	}); 
+</script>

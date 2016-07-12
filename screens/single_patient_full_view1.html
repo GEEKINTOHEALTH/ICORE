@@ -1,0 +1,475 @@
+<style type="text/css" media="screen">
+	.summary-chart {
+		height: 100px;
+		border: 1px solid black;
+		width: 100%;
+	}
+
+	.styled-select {
+		text-align: center;
+		background-color: #F5F5F5;
+		appearance: none;
+		-moz-appearance: none; /* Firefox */
+		-webkit-appearance: none; /* Safari and Chrome */
+		border: none;
+	}
+
+	#ihc-screen * {
+		color: black;
+	}
+	table tr td:nth-child(1) {
+		width: 20%;
+	}
+</style>
+<div class="container-fluid">
+	<div class="row" style="margin-top: 15px;">
+		<div class="col-sm-12">
+			<div class="card-1" style="background: white;padding: 10px;height: 110px;">
+				<div class="col-sm-3 col-md-3">
+					<img class="img-circle" src="https://randomuser.me/api/portraits/men/29.jpg" width="90">
+				</div>
+				<div class="col-sm-3 col-md-3">
+					<a class="btn btn-default btn-sm" onclick="$('body').trigger('patient-details');">Nick Nightingale</a>
+					<br />
+					<br />
+					<span style="margin: 0px 20px;">Gender : Male</span>
+				</div>
+				<div class="col-sm-6 col-md-6">
+					<span style="margin: 0px 20px;">Address : 6456 5th Street East, Carson, CA 90745</span>
+					<br />
+					<br />
+					<br />
+					<span>Age : 35</span> 
+					<span style="margin: 0px 20px">Race : Caucasion</span> 
+					<span> Phone no : +1408-683-6383</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 10px;">
+		<div class="col-sm-12">
+			<div class="card-1" style="background: white;height: 40px;">
+				<div class="col-sm-6" align="center">
+					<h4>Study Title : Maintenance Therapy for Multiple Myeloma</h4> 
+				</div>
+				<div class="col-sm-6" align="center">
+					<h4>Visit :  8/15/2014</h4>  
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="mrow animated fadeInUp" id="ihc-screen">
+		<div class="mitem">
+			<div class="card-panel card-1 ">
+				<h4 class="section-head" data-screenname="images"><i class="fa fa-empire"></i>CYTOKINE</h4>
+				<div class="pad10">
+					<div>
+						<a onclick="$('body').trigger('cytokine-trend-screen');" style="text-decoration:none;">
+						<table class="table table-condensed table-hover">
+							<thead>
+								<th> MARKER </th>
+								<th></th>
+							</thead>
+							<tbody id="cytokine-summary-chart"></tbody>
+						</table> </a>
+						<a onclick="$('body').trigger('cytokine-screen');" style="text-decoration:none;"><span class="text-left">more... </span></a>
+					</div>
+				</div>
+				<div style="padding-left:10px;">
+					<span id="info-visit" class="text-left">Info Source</span>
+					<div class="pad10">
+						<table class="table table-condensed table-hover">
+							<tr>
+								<td>Process Data</td>
+								<td>4284</td>
+							</tr>
+							<tr>
+								<td>Raw Data</td>
+								<td>1 File</td>
+							</tr>
+							<tr>
+								<td>Box Upload status</td>
+								<td>Complete</td>
+							</tr>
+							<tr>
+								<td>Raw Data Location</td>
+								<td>IMT Network Drive</td>
+							</tr>
+							<tr>
+								<td>System/Data Flow</td>
+								<td>Not Available</td>
+							</tr>
+							<tr>
+								<td>Assay Instrument</td>
+								<td>MSD V-PLEX</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mitem">
+			<div class="card-panel card-1 ">
+				<h4 class="clearfix section-head" data-screenname="images"><i class="fa fa-line-chart"></i>IHC</h4>
+				<select class="styled-select pull-right styledselect1" style="margin:0px;padding:0px;margin-top: -40px;">
+					<option value="Density" selected="selected">Density</option>
+					<option value="Percent">Percent</option>
+					<option value="H-Score">H-score</option>
+				</select>
+				<div class="pad10">
+					<a onclick="$('body').trigger('ihc-screen');" style="text-decoration:none;">
+					<div>
+						<table class="table table-condensed table-hover">
+							<thead style="display:block;">
+								<th>MARKER</th>
+								<th></th>
+							</thead>
+							<tbody id="ihc-summary-chart"></tbody>
+						</table>
+					</div> </a>
+				</div>
+				<div style="padding-left:10px;">
+					<span id="info-visit" class="text-left">Info Source</span>
+					<div class="pad10">
+						<table class="table table-condensed table-hover">
+							<tr>
+								<td>Process Data</td>
+								<td>1326</td>
+							</tr>
+							<tr>
+								<td>Raw Data</td>
+								<td>16 of 483 images</td>
+							</tr>
+							<tr>
+								<td>Box Upload status</td>
+								<td>Partial</td>
+							</tr>
+							<tr>
+								<td>Raw Data Location</td>
+								<td>IMT Network Drive</td>
+							</tr>
+							<tr>
+								<td>System/Data Flow</td>
+								<td>Available</td>
+							</tr>
+							<tr>
+								<td>Assay Instrument</td>
+								<td> Aperio VERSA </td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mitem">
+			<div class="card-panel card-1 ">
+				<h4 class="clearfix section-head" data-screenname="images"><i class="fa fa-link"></i>FLOW CYTOMETRY</h4>
+				<select class="styled-select pull-right styledselect2" style="margin:0px;padding:0px;margin-top: -40px;">
+					<option value="PERCENT" selected="selected">Percent</option>
+				</select>
+				<div class="pad10">
+					<a onclick="$('body').trigger('flowcytometry-screen');" style="text-decoration:none;">
+					<table class="table table-condensed table-hover">
+						<thead style="display:block;">
+							<th> POPULATION </th>
+							<th style="padding-left:150px;"> RESULT </th>
+						</thead>
+						<tbody id="flowcytometry-chart"></tbody>
+					</table> <span class="text-left">more... </span></a>
+				</div>
+				<div style="padding-left:10px;padding-bottom:10px;">
+					<span class="text-left trend-visit">Show Trend <i class="fa fa-angle-down fa-lg" aria-hidden="true"></i></span>
+					<div class="pad10" id="common-trend-chart" style="display:none">
+						<img src="img/mocks/cyto.png" width="100%"/>
+					</div>
+				</div>
+				<div style="padding-left:10px;">
+					<span id="info-visit" class="text-left">Info Source</span>
+					<div class="pad10">
+						<table class="table table-condensed table-hover">
+							<tr>
+								<td>Process Data</td>
+								<td>4182</td>
+							</tr>
+							<tr>
+								<td>Raw Data</td>
+								<td>51 of 3778 Files</td>
+							</tr>
+							<tr>
+								<td>Box Upload status</td>
+								<td>Partial</td>
+							</tr>
+							<tr>
+								<td>Raw Data Location</td>
+								<td>IMT Network Drive</td>
+							</tr>
+							<tr>
+								<td>System/Data Flow</td>
+								<td>Not Available</td>
+							</tr>
+							<tr>
+								<td>Assay Instrument</td>
+								<td>BD FACSCanto</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script id="marker_row_temp" type="text/template">
+	{{#rows}}
+	<tr>
+	<td valign="middle" class="leftpad-20">
+	<p>
+	{{.}}
+	</p>
+	</td>
+	<td valign="middle">
+	<span id="{{.}}">Loading..</span>
+	</td>
+	</tr>
+	{{/rows}}
+</script>
+
+<script id="marker_row_temp2" type="text/template">
+	{{#rows}}
+	<tr>
+	<td valign="middle" class="leftpad-20">
+	<p>
+	{{marker}}
+	</p>
+	</td>
+	<td valign="middle">
+	<span id="{{id}}">Loading..</span>
+	</td>
+	</tr>
+	{{/rows}}
+</script>
+<script type="text/javascript">
+	$(function() {
+		$(".trend-visit").click(function() {
+			var display = $(this).siblings('#common-trend-chart').css('display');
+			$(this).html('Hide Trend <i class="fa fa-angle-up fa-lg" aria-hidden="true"></i>');
+			$(this).next().addClass("animated bounceIn").show();
+			;
+			if (display === 'block') {
+				$(this).html('Show Trend <i class="fa fa-angle-down fa-lg" aria-hidden="true"></i>');
+				$(this).next().hide();
+			}
+		});
+
+		$("#name-of-card").click(function() {
+			document.querySelector(".flipper").classList.toggle("flip");
+		});
+
+		function renderCytokineSummary() {
+			var qry = {
+				"result" : {
+					$ne : "NULL"
+				}
+			},
+			    cytokineRecords = [],
+			    renderObject = {},
+			    markers = [],
+			    CytokineSummaryHtml = '',
+			    CytokineSummaryTemplate = $('#marker_row_temp').html();
+
+			if ($('#select-pid').val())
+				qry.cpan = $('#select-pid').val();
+
+			cytokineRecords = db2.getCollection('CYTOKINE').findObjects(qry);
+			cytokineRecords.forEach(function(obj) {
+				if (!renderObject[obj.marker])
+					renderObject[obj.marker] = [];
+				renderObject[obj.marker].push(obj.result);
+			});
+
+			$.each(renderObject, function(key, value) {
+				if (markers.length < 5 && value.length)
+					markers.push(key.replace(/ |\//g, '-'));
+			});
+
+			CytokineSummaryHtml = Mustache.to_html(CytokineSummaryTemplate, {
+				rows : markers
+			});
+
+			$("#cytokine-summary-chart").html(CytokineSummaryHtml);
+
+			$.each(renderObject, function(key, value) {
+				if (value.length > 1) {
+					$("#" + key.replace(/ |\//g, '-')).sparkline(value, {
+						type : 'line',
+						width : '100%',
+						height : 20,
+						spotRadius : 4,
+						fillColor : '#f5f5f5',
+						lineColor : '#7f7f00',
+					});
+				} else if (value.length) {
+					$("#" + key.replace(/ |\//g, '-')).html(value);
+				}
+			});
+		}
+
+		// ---------------------------------------------------------------------------------------------------------
+
+		//rendering IHC SUMMARY
+		function renderIHCSummary(measure) {
+			var qry = {
+				"measure" : measure,
+				"result" : {
+					$ne : "NULL"
+				}
+			},
+			    ihcRecords = [],
+			    renderObject = {},
+			    markers = [],
+			    IHCSummaryHtml = '',
+			    IHCSummaryTemplate = $('#marker_row_temp').html();
+
+			/* ihcRecords = (JSON.parse(localStorage.getItem('DATASOURCE')).IHC).filter(function(obj){
+			 if($('#select-pid').val()) if(obj.pan !== $('#select-pid').val()) return false;
+			 return obj.measure == measure && obj.result !== "NULL";
+			 }); */
+
+			if ($('#select-pid').val())
+				qry.pan = $('#select-pid').val();
+
+			ihcRecords = db2.getCollection('IHC').findObjects(qry);
+			ihcRecords.forEach(function(obj) {
+				if (!renderObject[obj.marker])
+					renderObject[obj.marker] = [];
+				renderObject[obj.marker].push(obj.result);
+			});
+
+			$.each(renderObject, function(key, value) {
+				if (value.length)
+					markers.push(key.replace(/ /g, '-'));
+			});
+
+			if (markers.length > 5) {
+				$('#ihc-summary-chart').css({
+					"display" : "block",
+					"overflow-y" : "auto",
+					"height" : "200px",
+					"padding-right" : "10px"
+				});
+			}
+
+			IHCSummaryHtml = Mustache.to_html(IHCSummaryTemplate, {
+				rows : markers
+			});
+			$("#ihc-summary-chart").html(IHCSummaryHtml);
+
+			$.each(renderObject, function(key, value) {
+				if (value.length > 1) {
+					$("#" + key.replace(/ /g, '-')).sparkline(value, {
+						type : 'line',
+						width : '100%',
+						height : 20,
+						spotRadius : 4,
+						fillColor : '#f5f5f5',
+						lineColor : '#7f7f00'
+					});
+				} else if (value.length) {
+					$("#" + key.replace(/ /g, '-')).html(value);
+				}
+			});
+		}
+
+
+		$('.styledselect1').on('change', function() {
+			renderIHCSummary(this.value);
+		});
+
+		//rendering FlowCytoMetry(FCM) SUMMARY
+		function renderFCMSummary(measure) {
+			var qry = {
+				"measure" : measure,
+				"result" : {
+					$ne : "NULL"
+				}
+			},
+			    fCMRecords = [],
+			    count = 0,
+			    renderObject = {},
+			    markers = [],
+			    FCMSummaryHtml = '',
+			    FCMSummaryTemplate = $('#marker_row_temp2').html();
+
+			if ($('#select-pid').val())
+				qry.pan = $('#select-pid').val();
+
+			fCMRecords = db2.getCollection('FLOWCYTOMETRY').findObjects(qry);
+			fCMRecords.forEach(function(obj) {
+				if (obj.marker && !renderObject[obj.marker])
+					renderObject[obj.marker] = [];
+				renderObject[obj.marker].push(obj.result);
+			});
+
+			$.each(renderObject, function(key, value) {
+				if (value.length >= 1) {
+					markers.push({
+						'marker' : key,
+						'id' : key.replace(/\+/g, '_')
+					});
+				}
+			});
+
+			if (markers.length > 5) {
+				$('#flowcytometry-chart').css({
+					"display" : "block",
+					"overflow-y" : "auto",
+					"height" : "200px",
+					"padding-right" : "10px"
+				});
+			}
+
+			FCMSummaryHtml = Mustache.to_html(FCMSummaryTemplate, {
+				rows : markers
+			});
+			$("#flowcytometry-chart").html(FCMSummaryHtml);
+
+			$.each(renderObject, function(key, value) {
+				if (value.length > 1) {
+					$("#" + key.replace(/\+/g, '_')).sparkline(value, {
+						type : 'box',
+						width : '100%',
+						height : 20,
+						spotRadius : 4,
+						fillColor : '#f5f5f5',
+						lineColor : '#7f7f00',
+						tooltipContainer : $('#flowcytometry-chart')
+					});
+				} else if (value.length) {
+					$("#" + key.replace(/\+/g, '_')).html(value);
+				}
+			});
+		};
+
+		$('.styledselect2').on('change', function() {
+			renderFCMSummary(this.value);
+		});
+
+		if (!localStorage.getItem('DATASOURCE')) {
+			setTimeout(function() {
+				renderCytokineSummary();
+				renderIHCSummary('Density');
+				renderFCMSummary('PERCENT');
+			}, 10000);
+			return;
+		}
+		renderCytokineSummary();
+		renderIHCSummary('Density');
+		renderFCMSummary('PERCENT');
+
+		$(window).smartresize(function() {
+			renderCytokineSummary();
+			renderIHCSummary($('.styledselect1').val());
+			renderFCMSummary($('.styledselect2').val());
+		});
+	});
+</script>

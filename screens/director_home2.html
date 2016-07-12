@@ -1,0 +1,368 @@
+<style type="text/css">
+	.highcharts-title, .highcharts-button , text[text-anchor=end]/*, rect[fill=green], rect[fill=red], rect[fill=black] */ {
+		display: none;
+	}
+	
+	#container {
+    	height:100%;
+    	width:100%;
+    	position: relative;
+	}
+</style>
+<div class="container animated fadeInUp" style="margin-top: 20px;">
+	<div class="row">
+		<div class="col-sm-12" align="center">
+			<h4>DIRECTOR DASHBOARD</h4>
+			<!--<div class="summary-charts" id="adverse_events"></div>-->
+			<div class="summary-charts" id="container" style="margin-bottom: 10px;"></div>
+		</div>
+		<div class="col-sm-3" align="center">
+			<h4>Study Status</h4>
+			<div class="summary-charts" id="study_status"></div>
+		</div>
+		<div class="col-sm-3" align="center">
+			<h4>Study Participants</h4>
+			<div class="summary-charts" id="study_participants"></div>
+		</div>
+		<div class="col-sm-3" align="center">
+			<h4>Demographic</h4>
+			<div class="summary-charts" id="demographic_ratio" ></div>
+		</div>
+		<div class="col-sm-3" align="center">
+			<h4>Gender Ratio</h4>
+			<div class="summary-charts" id="gender_ratio"></div>
+		</div>
+		<div class="col-xs-12">
+			<div class="table-wrapper card" style="margin-top: 25px;">
+				<table class="sortable table-bordered  table-condensed cf table-hover" width="100%">
+					<thead class="cf" style="background:#ffe5e5;">
+						<tr>
+							<th> STUDY ID </th>
+							<th> NCT-NUMBER </th>
+							<th> TITLE </th>
+							<th> PHASE </th>
+							<th> STATUS </th>
+							<th> START DATE </th>
+							<th> END DATE </th>
+						</tr>
+					</thead>
+					<tbody id="study-list"></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script id='study-template' type="text/template">
+	{{#rows}}
+	<tr style="padding: 20px;">
+	<td style="text-align: center" data-title="STUDYID">
+	<a class="btn btn-default" onclick="$('body').trigger('full-study-view',['{{studyid}}']);">{{studyid}}</a>
+	</td>
+	<td style="text-align: center" data-title="NCTNO">
+	{{ctorgid}}
+	</td>
+	<td style="text-align: left" data-title="STUDYTITLE">
+	{{studytitle}}
+	</td>
+	<td style="text-align: left" data-title="PHASE">
+	{{phase}}
+	</td>
+	<td style="text-align: left" data-title="STATUS">
+	{{status}}
+	</td>
+	<td style="text-align: left" data-title="STARTDATE">
+	{{startdate}}
+	</td>
+	<td style="text-align: right" data-title="ENDDATE">
+	{{completiondate}}
+	</td>
+	</tr>
+	{{/rows}}
+</script>
+
+<script type="text/javascript">
+	$(function() {
+		$("#menubutton").show();
+		$("#homebutton").show();
+		$("#top-right-holder").show();
+		$('.pg-holder').hide();
+		function renderStudyList(rows) {
+			var StudyTemplate = $('#study-template').html();
+			var StudyHtml = Mustache.to_html(StudyTemplate, {
+				'rows' : rows
+			});
+			$("#study-list").html(StudyHtml);
+			$.bootstrapSortable( applyLast = true);
+		}
+
+		var qry = {
+			'studyid' : {
+				$ne : ""
+			}
+		},
+		    rows = '',
+		    pageHitCount = 1,
+		    startRange = 0;
+		function bootsrapPageRendering() {
+			rows = db2.getCollection('STUDIES').findObjects(qry);
+			/* rows.forEach(function(study) {
+				study.phase = study.phase.replace(/\s+/g, '');
+			}); */
+			//if total rows count is less than 50,pagination not required
+			if (rows.constructor === Array && rows.length > 50)
+				$('.pg-holder').show();
+			renderStudyList(onLeft(rows, startRange, pageHitCount));
+		}
+
+		if (!localStorage.getItem('DATASOURCES')) {
+			setTimeout(function() {
+				bootsrapPageRendering();
+			}, 10000);
+			return;
+		}
+		bootsrapPageRendering();
+
+		$('#pg-left').click(function() {
+			pageHitCount = pageHitCount - 1;
+			startRange = startRange - 50;
+			renderStudyList(onLeft(rows, startRange, pageHitCount));
+		});
+
+		$('#pg-right').click(function() {
+			pageHitCount = pageHitCount + 1;
+			startRange = startRange + 50;
+			renderStudyList(onRight(rows, startRange, pageHitCount));
+		});
+
+		var Options = jQuery.extend(true, {
+			chartArea : {
+				left : 0,
+				right : 0,
+				top : 5,
+				bottom : 50,
+			},
+			width : '100%',
+			height : '100%',
+			curveType : 'function',
+			legend : {
+				position : "bottom",
+				textStyle : {
+					fontSize : 12
+				}
+			},
+			pieHole : 0.4,
+			pieSliceText : 'value',
+		}, options);
+
+		var pieChart;
+
+		function drawGender(pieData) {
+			pieChart = new google.visualization.PieChart(document.getElementById('gender_ratio'));
+			pieChart.draw(pieData, Options);
+			$(window).smartresize(function() {
+				pieChart.draw(pieData, Options);
+			});
+		};
+		function drawAdverse(columnData) {
+			var columnChart = new google.visualization.ColumnChart(document.getElementById('adverse_events'));
+			columnChart.draw(columnData, Options);
+			google.visualization.events.addListener(columnChart, 'select', function() {
+				var selectedItem = columnChart.getSelection()[0];
+				if (selectedItem) {
+					var studyId = columnData.getValue(selectedItem.row, 0);
+					var total = columnData.getValue(selectedItem.row, 1);
+					//console.log('STUDY_ID is ---' + studyId + ' TOTAL --' + total);
+					$('body').trigger('full-study-view', [studyId]);
+				}
+			});
+			$(window).smartresize(function() {
+				columnChart.draw(columnData, Options);
+			});
+		};
+		function drawDemographic(pieData) {
+			pieChart = new google.visualization.PieChart(document.getElementById('demographic_ratio'));
+			pieChart.draw(pieData, Options);
+			$(window).smartresize(function() {
+				pieChart.draw(pieData, Options);
+			});
+		};
+		function drawStudy(pieData) {
+			pieChart = new google.visualization.PieChart(document.getElementById('study_status'));
+			pieChart.draw(pieData, Options);
+			$(window).smartresize(function() {
+				pieChart.draw(pieData, Options);
+			});
+		};
+		function drawParticipants(pieData) {
+			pieChart = new google.visualization.PieChart(document.getElementById('study_participants'));
+			pieChart.draw(pieData, Options);
+			$(window).smartresize(function() {
+				pieChart.draw(pieData, Options);
+			});
+		};
+
+		function getGender() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Name');
+			data.addColumn('number', 'Value');
+			data.addRow(["Male", 230]);
+			data.addRow(["Female", 295]);
+
+			return data;
+		}
+
+		function getAdverse() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Study ID');
+			data.addColumn('number', 'Adverse Events: ');
+			data.addColumn('number', 'Average Grade: ');
+			data.addColumn('number', 'Target Recuirtment: ');
+			data.addColumn('number', 'Recuirtment: ');
+			data.addRow(["UCSF01748264", 10, 12, 49, 20]);
+			data.addRow(["UCSF84726490", 11, 11, 39, 15]);
+			data.addRow(["UCSF17315398", 12, 9, 29, 10]);
+			data.addRow(["UCSF01710683", 13, 8, 36, 16]);
+			data.addRow(["UCSF97659274", 14, 3, 10, 0]);
+
+			return data;
+		}
+
+		function getDemographic() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Ethnicity');
+			data.addColumn('number', 'Value');
+			data.addRow(["C", 520]);
+			data.addRow(["AA", 289]);
+			data.addRow(["A", 402]);
+			data.addRow(["H", 173]);
+			return data;
+		}
+
+		function getStudy() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Name');
+			data.addColumn('number', 'Value');
+			data.addRow(["Active - Recruiting", 3]);
+			data.addRow(["Active - Not Recruiting", 5]);
+			data.addRow(["Withdrawn", 1]);
+			data.addRow(["Complete", 12]);
+
+			return data;
+		}
+
+		function getParticipants() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Name');
+			data.addColumn('number', 'Value');
+			data.addRow(["Enrolled", 230]);
+			data.addRow(["To Be Enrolled", 295]);
+
+			return data;
+		}
+
+		google.charts.setOnLoadCallback(function() {
+			//drawAdverse(getAdverse());
+			drawGender(getGender());
+			drawDemographic(getDemographic());
+			drawParticipants(getParticipants());
+			drawStudy(getStudy());
+			drawAdversesUsingHighCharts();
+		});
+		
+		function drawAdversesUsingHighCharts(){
+			var studies = db2.getCollection('STUDIES').findObjects({studyid : {$ne : ""}});
+			var studyIds = [], adverseEvents = [10, 20, 30, 40, 45, 50, 55, 60], averageGrade = [], targetEnrollment = [], enrollment = [];
+			
+			for(var i =0; i < 8; i++){
+				var study = studies[i];
+				studyIds.push(study.studyid);
+				//adverseEvents.push((isNaN(study.adverseevents))? 0 : Number(study.adverseevents));
+				averageGrade.push((isNaN(study.averagegrade))? 0 : Number(study.averagegrade));
+				targetEnrollment.push((isNaN(study.targetenrollment))? 0 : Number(study.targetenrollment));
+				enrollment.push((isNaN(study.enrollment))? 0 : Number(study.enrollment));
+			}
+			
+			$('#container').highcharts({ 
+  				chart: { type: 'column'},
+  				height : 200,
+       	 		xAxis: {
+            		categories: studyIds,
+            		crosshair: false
+        		},
+        		yAxis: {
+            		min: 0
+        		},
+        		tooltip: {
+            		headerFormat: '<table>',
+            		pointFormat: '<tr><td style="color:{series.color};padding:0;text-align:left;font-weight:bold;font-size:10px;">{series.name}: </td>' + '<td style="padding:0"><b>{point.y:.f}</b></td></tr>',
+            		footerFormat: '</table>',
+            		shared: true,
+            		useHTML: true
+        		},
+        		plotOptions: {
+            		column: {
+                		pointPadding: 0.2,
+                		borderWidth: 0
+            		},
+            		series: {
+                		cursor: 'pointer',
+                			point: {
+                    				events: {
+                        			click: function (e) {
+                            			$('body').trigger('full-study-view',[this.category]);
+                        		}
+                    		}
+                		}
+            		}
+        		},
+        		legend: {
+        			enabled : false,
+          			borderRadius:0,
+            		backgroundColor: '#FFFFFF',
+            		itemMarginBottom: 7,
+            		useHTML:true,
+   					labelFormatter: function() {
+      					var total = 0;
+      					for(var i=this.yData.length; i--;) { total += this.yData[i]; };
+      					return this.name + ': ' + total;
+  					}
+  				},
+        		series: [{
+            		name: 'Adverse Events',
+            		data: adverseEvents,
+            		color: '#dc3912'
+        		}, {
+            		name: 'Target Recuirtment',
+            		data: targetEnrollment,
+            		color: '#3366CC'
+        		}, {
+            		name: 'Recuirtment',
+            		data: enrollment,
+            		color: '#109618'
+        		},{
+            		name: 'Average Grade',
+            		data: averageGrade,
+            		color: '#ff9900'
+        		}]
+    		});
+		}
+	}); 
+	
+	/*series: [{
+            		name: 'Adverse Events',
+            		data: [10, 11, 12, 13,14],
+            		color: '#3399FF'
+        		}, {
+            		name: 'Average Grade',
+            		data: [12, 11, 9, 8,3],
+            		color: '#FF66CC'
+        		}, {
+            		name: 'Target Recuirtment',
+            		data: [49, 29, 39, 36,10],
+            		color: '#333333'
+        		}, {
+            		name: 'Recuirtment',
+            		data: [20,10 ,15 ,16 ,0],
+            		color: 'green'
+        		}]*/
+</script>

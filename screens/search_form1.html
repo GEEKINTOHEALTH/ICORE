@@ -1,0 +1,380 @@
+<style type="text/css" media="screen">
+    .para-heading {
+        color: white;
+        font-size: 1.2em;
+    }
+
+    #search_popup th {
+        color: white;
+        text-align: center;
+        font-size: 10px;
+    }
+
+    #search_popup td {
+        color: white;
+        text-align: center;
+        font-size: 10px;
+    }
+
+    .addContext {
+        color: white;
+        background: rgba(0,0,0,0.2);
+        border: none;
+        padding: 10px;
+    }
+    .addContext > span {
+        margin-left: 12px;
+        margin-bottom: -10px;
+    }
+
+    h4 {
+        color: white;
+    }
+
+    @media only screen and (max-width: 800px) {
+
+        #no-more-tables table, #no-more-tables thead, #no-more-tables tbody, #no-more-tables th, #no-more-tables td, #no-more-tables tr {
+            display: block;
+        }
+
+        #no-more-tables thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        #no-more-tables tr {
+            border: 1px solid #ccc;
+        }
+
+        #no-more-tables td {
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+            white-space: normal;
+            text-align: left;
+        }
+
+        #no-more-tables td:before {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        #no-more-tables td:before {
+            content: attr(data-title);
+        }
+    }
+    .dropbtn {
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropbtn:hover, .dropbtn:focus {
+        background-color: #8e001b;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        overflow: auto;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+</style>
+<div class="white-glass pad20">
+    <form class="form-inline">
+        <input type="text" name="search" id="searchitem" class="form-control input-md text-center">
+        <button id="search_button" type="submit" value="search" class="btn btn-danger" >
+            SEARCH
+        </button>
+    </form>
+    <div id="alert">
+    </div>
+</div>
+<div class="container-fluid animated fadeInRight" style="margin-top: 20px;" id="search_popup">
+    <div id="no-more-tables" class="table-responsive">
+        <table class="table-bordered  table-condensed cf" align="center">
+            <thead class="cf">
+            <tr>
+                <th>
+                    <button class="btn btn-danger dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+                        Cancer Type
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Bone Cancer</a></li>
+                        <li><a href="#">Breast Cancer</a></li>
+                        <li><a href="#">Cervical Cancer</a></li>
+                        <li><a href="#">Eye Cancer</a></li>
+                        <li><a href="#">Gallbladder Cancer</a></li>
+                        <li><a href="#">Kidney Cancer</a></li>
+                        <li><a href="#">Lung Cancer</a></li>
+                        <li><a href="#">Liver Cancer</a></li>
+                        <li><a href="#">Lymphoma</a></li>
+                        <li><a href="#">Malignant Mesothelioma</a></li>
+                        <li><a href="#">Prostate Cancer</a></li>
+                        <li><a href="#">Thyroid Cancer</a></li>
+                    </ul>
+                </th>
+                <th>
+                    <button class="btn btn-danger dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+                        Study Type
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Intervention</a></li>
+                        <li><a href="#">Observation</a></li>
+                        <li><a href="#">Expanded Access</a></li>
+
+                    </ul>
+                </th>
+                <th>
+                    <button class="btn btn-danger dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+                        Recruitment Status
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Not Recruiting</a></li>
+                        <li><a href="#">Recruiting</a></li>
+                        <li><a href="#">Enrolled by invitation</a></li>
+                        <li><a href="#">Active</a></li>
+                        <li><a href="#">Completed</a></li>
+                        <li><a href="#">Suspended</a></li>
+                        <li><a href="#">Withdrawn</a></li>
+                        <li><a href="#">Terminated</a></li>
+                    </ul>
+                </th>
+                <th style="word-wrap:break-word;">
+                    <button class="btn btn-danger btn-xs dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+                        Start Date
+                    </button>
+                    <!--                            <ul class="dropdown-menu pull-center">
+
+                                                </ul>-->
+                </th>
+                <th>
+                    <button class="btn btn-danger btn-xs dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+                        End Date
+                    </button>
+                    <!--                            <ul class="dropdown-menu pull-center">
+
+                                                </ul>-->
+                </th>
+                <th>
+                    <button class="btn btn-danger btn-xs dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+                        Intervention
+                    </button>
+                    <ul class="dropdown-menu pull-center">
+                        <li><a href="#">Drug</a></li>
+                        <li><a href="#">Device</a></li>
+                        <li><a href="#">Biological/Vaccine</a></li>
+                        <li><a href="#">Procedure/Surgery</a></li>
+                        <li><a href="#">Radiation</a></li>
+                        <li><a href="#">Behavioral</a></li>
+                        <li><a href="#">Genetic</a></li>
+                        <li><a href="#">Immunotherapy</a></li>
+                        <li><a href="#">Other</a></li>
+
+                    </ul>
+                </th>
+                <th>
+                    <button class="btn btn-danger btn-xs dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+                        Drug
+                    </button>
+                    <ul class="dropdown-menu pull-center">
+                        <li><a href="#">Avastin (Bevacizumab)</a></li>
+                        <li><a href="#">Lupron Depot (Leuprolide)</a></li>
+                        <li><a href="#">Lynparza (Olaparib) </a></li>
+                        <li><a href="#">Oncovin (Vincristine) </a></li>
+                        <li><a href="#">Opdivo (Nivolumab Injection) </a></li>
+                        <li><a href="#">Paraplatin (Carboplatin)  </a></li>
+                        <li><a href="#">Purinethol (Mercaptopurine) </a></li>
+                        <li><a href="#">Sandostatin (Octreotide) </a></li>
+                        <li><a href="#">Stivarga (Regorafenib) </a></li>
+                        <li><a href="#">Sylvant (Siltuximab Injection) </a></li>
+                        <li><a href="#">Taxol (Paclitaxel Injection)  </a></li>
+                        <li><a href="#">Temodar (Temozolomide Injection)  </a></li>
+                        <li><a href="#">HTrisenox (Arsenic trioxide)</a></li>
+                        <li><a href="#">Velban (Vinblastine)</a></li>
+                    </ul>
+                </th>
+                <th>
+                    <button class="btn btn-danger btn-xs dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+                        Primary Outcome
+                    </button>
+                    <ul class="dropdown-menu pull-center">
+                        <li><a href="#">Incidence</a></li>
+                        <li><a href="#">TTP</a></li>
+                        <li><a href="#">Tumor Response Rate</a></li>
+                        <li><a href="#">Recurrance</a></li>
+                        <li><a href="#">Disease Free Survival</a></li>
+                        <li><a href="#">Progression Free Survival</a></li>
+                    </ul>
+                </th>
+                <th>
+                    <button class="btn btn-danger btn-xs dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+                        Secondary Outcome
+                    </button>
+                    <ul class="dropdown-menu pull-center">
+                        <li><a href="#">Adverse Events</a></li>
+                        <li><a href="#">Lab Anomalities</a></li>
+                        <li><a href="#">Complete Rermission Rate</a></li>
+                        <li><a href="#">Duration of Response</a></li>
+                        <li><a href="#">B Symptoms</a></li>
+                        <li><a href="#">Antitherapeutic Antibodies</a></li>
+                    </ul>
+                </th>
+                <th>
+                    <button class="btn btn-danger btn-xs dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+                        Test Category
+                    </button>
+                    <ul class="dropdown-menu pull-center">
+                        <li><a href="#">Cytokine</a></li>
+                        <li><a href="#">Flow</a></li>
+                        <li><a href="#">Micro RNA</a></li>
+                        <li><a href="#">Elispot</a></li>
+                        <li><a href="#">Proliferation</a></li>
+                        <li><a href="#">TCR</a></li>
+                        <li><a href="#">RNA Sequence</a></li>
+                        <li><a href="#">DNA Sequence</a></li>
+                    </ul>
+                </th>
+                <th>
+                    <button class="btn btn-danger btn-xs dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+                        Gender
+                    </button>
+                    <ul class="dropdown-menu pull-center">
+                        <li><a href="#">Male</a></li>
+                        <li><a href="#">Female</a></li>
+                        <li><a href="#">Other</a></li>
+                    </ul>
+                </th>
+                <th>
+                    <button class="btn btn-danger btn-xs dropdown-toggle btn-xs" type="button" data-toggle="dropdown">
+                        Race
+                    </button>
+                    <ul class="dropdown-menu pull-center">
+                        <li><a href="#">White</a></li>
+                        <li><a href="#">African American</a></li>
+                        <li><a href="#">Asian</a></li>
+                        <li><a href="#">Hispanic</a></li>
+                        <li><a href="#">Other</a></li>
+
+                    </ul>
+                </th>
+
+            </tr>
+
+            </thead>
+            <tbody id="clinical-data">
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+<script id='clinical-data-table-row' type="text/template">
+    {{#rows}}
+    <tr>
+        <td data-title="Receptor">
+            {{Receptor}}
+        </td>
+        <td data-title="Patient">
+            {{Patient}}
+        </td>
+        <td data-title="Sample">
+            {{Sample}}
+        </td>
+        <td data-title="Experiment">
+            {{Experiment}}
+        </td>
+        <td data-title="Input_ng">
+            {{Input_ng}}
+        </td>
+        <td data-title="Log10_Frequency">
+            {{Log10_Frequency}}
+        </td>
+        <td data-title="Clone_Molecule_Count_From_Spikes">
+            {{Clone_Molecule_Count_From_Spikes}}
+        </td>
+        <td data-title="Total_Read_Count">
+            {{Total_Read_Count}}
+        </td>
+        <td data-title="J_Segment_Major_Gene">
+            {{J_Segment_Major_Gene}}
+        </td>
+        <td data-title="V_Segment_Major_Gene">
+            {{V_Segment_Major_Gene}}
+        </td>
+        <td data-title="Clone_Sequence">
+            {{Clone_Sequence}}
+        </td>
+        <td data-title="Clone_Protein_Sequence">
+            {{Clone_Protein_Sequence}}
+        </td>
+        <td data-title="CDR3_Sense_Sequence">
+            {{CDR3_Sense_Sequence}}
+        </td>
+    </tr>
+    {{/rows}}
+</script>
+
+<script type="text/javascript">
+
+    $(function(){
+
+        $(".dropdown-menu li a").click(function(){
+
+            $(".btn:first-child").text($(this).text());
+            $(".btn:first-child").val($(this).text());
+
+        });
+
+    });
+
+
+
+    $('#search_button').click(function(){
+        if ($('#searchitem').val()) {
+            search($('#searchitem').val());
+            return;
+        }
+        $('#alert').addClass("alert alert-danger").html('Value required');
+    });
+
+    function search(value){
+        $.ajax({
+            type: 'GET',
+            url: 'http://pediatrictimeline.com/search/' + value,
+            success: function(response){
+                var clincicalDataRowTemplate = $('#clinical-data-table-row').html();
+                var clincalDataTableBody = Mustache.to_html(clincicalDataRowTemplate, {
+                    rows: response
+                });
+                $("#clinical-data").html(clincalDataTableBody);
+            }
+        });
+    };
+</script>
