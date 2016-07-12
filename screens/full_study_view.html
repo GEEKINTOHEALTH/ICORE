@@ -1,0 +1,538 @@
+<div class="container animated fadeInUp" style="margin-top: 20px;">
+	<div style="margin: 10px;" align="center">
+		<h2 id="single-study-title">Maintenance Therapy for Multiple Myeloma</h2>
+	</div>
+	<div class="row">
+		<div class="col-sm-8" align="center">
+			<h4>Participants</h4>
+			<div class="summary-charts" id="participants_line"></div>
+		</div>
+		<div class="col-sm-4" align="center">
+			<h4>Demographic</h4>
+			<div class="summary-charts" id="demographic_pie"></div>
+		</div>
+		<div class="col-sm-4" align="center">
+			<h4>Male/Female Ratio</h4>
+			<div class="summary-charts" id="gender_pie" ></div>
+		</div>
+		<div class="col-sm-4" align="center">
+			<h4>Adverse Events</h4>
+			<div class="summary-charts" id="adverse_pie"></div>
+		</div>
+		<div class="col-sm-4" align="center">
+			<h4>Specimen Collection</h4>
+			<div class="summary-charts" id="specimen_pie"></div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="table-wrapper card" style="margin-top: 20px;">
+				<table class="table-bordered  table-condensed cf table-hover" width="100%">
+					<thead class="cf" style="background:#ffe5e5;">
+						<tr>
+							<th><!-- a class="pull-left" style="margin-left: 10px;" onclick="$('body').trigger('add-patient-to-study');">
+							<i class="fa fa-user-plus fa-lg" style="color: #333;"></i>
+							</a --><span>Patients</span></th>
+							<th>
+							<input class="pull-left" type="checkbox"/>
+							<span>Visit-1</span></th>
+							<th>
+							<input class="pull-left" type="checkbox"/>
+							<span>Visit-2</span></th>
+							<th>
+							<input class="pull-left" type="checkbox"/>
+							<span>Visit-3</span></th>
+							<th>
+							<input class="pull-left" type="checkbox"/>
+							<span>Visit-4</span></th>
+							<th>
+							<input class="pull-left" type="checkbox"/>
+							<span>Visit-5</span></th>
+						</tr>
+					</thead>
+					<tbody id="study-details" class="searchable">
+						<tr>
+							<td>
+							<input class="pull-left" style="margin-left: 10px;" type="checkbox"/>
+							<a class="pull-left" style="margin-left: 5px" onclick="$('body').trigger('single-patient-view');">John Doe</a></td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 8.9
+							<br />
+							Cytokine - 52136.34
+							<br />
+							Flow - 93849.8736
+							<br />
+							Adverse Event - 29</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+						</tr>
+						<tr>
+							<td>
+							<input class="pull-left" style="margin-left: 10px;" type="checkbox"/>
+							<a class="pull-left" style="margin-left: 5px" onclick="$('body').trigger('single-patient-view');">Janet Johnson</a></td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 8.9
+							<br />
+							Cytokine - 52136.34
+							<br />
+							Flow - 93849.8736
+							<br />
+							Adverse Event - 29</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+						</tr>
+						<tr>
+							<td>
+							<input class="pull-left" style="margin-left: 10px;" type="checkbox"/>
+							<a class="pull-left" style="margin-left: 5px" onclick="$('body').trigger('single-patient-view');">Nick Nightingale</a></td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 8.9
+							<br />
+							Cytokine - 52136.34
+							<br />
+							Flow - 93849.8736
+							<br />
+							Adverse Event - 29</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+						</tr>
+						<tr>
+							<td>
+							<input class="pull-left" style="margin-left: 10px;" type="checkbox"/>
+							<a class="pull-left" style="margin-left: 5px" onclick="$('body').trigger('single-patient-view');">Francis Frasier</a></td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 8.9
+							<br />
+							Cytokine - 52136.34
+							<br />
+							Flow - 93849.8736
+							<br />
+							Adverse Event - 29</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+						</tr>
+						<tr>
+							<td>
+							<input class="pull-left" style="margin-left: 10px;" type="checkbox"/>
+							<a class="pull-left" style="margin-left: 5px" onclick="$('body').trigger('single-patient-view');">Dewey Donald</a></td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 8.9
+							<br />
+							Cytokine - 52136.34
+							<br />
+							Flow - 93849.8736
+							<br />
+							Adverse Event - 29</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+						</tr>
+						<tr>
+							<td>
+							<input class="pull-left" style="margin-left: 10px;" type="checkbox"/>
+							<a class="pull-left" style="margin-left: 5px" onclick="$('body').trigger('single-patient-view');">Shana Schwartz</a></td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 8.9
+							<br />
+							Cytokine - 52136.34
+							<br />
+							Flow - 93849.8736
+							<br />
+							Adverse Event - 29</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+							<td>IHC - 6.4
+							<br />
+							Cytokine - 136.34
+							<br />
+							Flow - 7373749.8736
+							<br />
+							Adverse Event - 4</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br/>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		
+		$('#single-study-title').html(function() {
+			var currentStudy = db2.getCollection('STUDIES').find({
+				'studyid' : LS.get_data('STUDYID')
+			});
+			return currentStudy[0].studytitle;
+		});
+
+		var pieOptions = jQuery.extend(true, {
+			chartArea : {
+				left : 0,
+				right : 0,
+				top : 5,
+				bottom : 50,
+			},
+			width : '100%',
+			height : '100%',
+			curveType : 'function',
+			legend : {
+				position : "bottom",
+				textStyle : {
+					fontSize : 10
+				}
+			},
+			pieHole : 0.4,
+			pieSliceText : 'value',
+		}, options);
+		
+		var pieChart;
+		var lineChart;
+		
+		function getCDate(today){
+			//console.log(today);
+			 var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+			 //var today = new Date();
+    		 var dd = today.getDate();
+    		 //console.log('dd' + dd);
+    		 var mm = today.getMonth();
+    		 //console.log('mm' + mm);
+
+       		 var yyyy = today.getFullYear();
+       		 //console.log('yyyy' + yyyy);
+    		 if(dd<10){
+        		dd='0'+dd
+    		 } 
+    		 if(mm<12){
+          		mm= months[mm];
+    		 } 
+     		 
+     		 today = dd+'-'+mm+'-'+yyyy.toString().substr(2,2);
+     		 
+     		 return today;
+		}
+
+		function drawParticipants() {
+			var currentStudy = db2.getCollection('STUDIES').find({
+				'studyid' : LS.get_data('STUDYID')
+			});
+			//console.log(JSON.stringify(currentStudy, null, 2));
+			
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Completion Date');
+			data.addColumn('number', 'Target Enrollment');
+			data.addColumn('number', 'Enrollment');
+			
+			var today = new Date();
+			var startDate = (currentStudy[0].startdate.trim())? currentStudy[0].startdate : '01-Jan-2016';
+			var endDate = (currentStudy[0].completiondate.trim())? currentStudy[0].completiondate : getCDate(today);
+			var targetEnrollment = (isNaN(currentStudy[0].targetenrollment))? 0 : Number(currentStudy[0].targetenrollment);
+			var enrollment = (isNaN(currentStudy[0].enrollment))? 0 : Number(currentStudy[0].enrollment);
+			
+			var datesArray = [];
+			
+			var startDateInMilliSeconds = Date.parse(startDate);
+			//console.log('startDateInMilliSeconds == ' + startDateInMilliSeconds);
+			var endDateInMilliSeconds = Date.parse(endDate);
+			//console.log('endDateInMilliSeconds == ' + endDateInMilliSeconds);
+			var n = 4,diff = (endDateInMilliSeconds - startDateInMilliSeconds);
+			//console.log('diff is = ' + (endDateInMilliSeconds - startDateInMilliSeconds));
+			if(diff > n){
+				var div = diff/n;
+				for(var i = 1; i < n; i++){
+					datesArray.push(new Date(startDateInMilliSeconds + (div * i)));
+				}
+			}	
+			
+			var enrollments = [];
+			if(enrollment && enrollment > 4){
+				var difference = enrollment/4;
+				for(var i = 1; i < 4; i += 1){
+					enrollments.push(difference * i);	
+				}
+			}
+			
+			
+			
+			data.addRow([getCDate(new Date(startDateInMilliSeconds)), targetEnrollment, 0]);
+			for(var i = 0; i < enrollments.length; i += 1){
+				if(Date.parse(today) > Date.parse(datesArray[i]))
+					data.addRow([getCDate(datesArray[i]), targetEnrollment, enrollments[i]] );	
+			}
+			//console.log(endDateInMilliSeconds);
+			//console.log(Date.parse(today));
+			//console.log('diff = ' + (endDateInMilliSeconds - Date.parse(today)));
+			if((endDateInMilliSeconds - Date.parse(today)) < 0){
+				data.addRow([getCDate(new Date(endDateInMilliSeconds)), targetEnrollment, enrollment]);
+			} else if((endDateInMilliSeconds - Date.parse(today)) > 0){
+				data.addRow([getCDate(today), targetEnrollment, enrollment]);
+				data.addRow([getCDate(new Date(endDateInMilliSeconds)), targetEnrollment, null]);	
+			}
+			
+			var lineOptions = {
+				chartArea : {
+					left : 40,
+					right : 0,
+					top : 5,
+					bottom : 40
+				},
+				width : '100%',
+				height : '100%',
+				curveType : 'function',
+				crosshair: { trigger: 'both' },
+				legend : {
+					position : "bottom",
+					textStyle : {
+						fontSize : 12
+					}
+				},
+				tooltip : {isHtml : true},
+				vAxis : {
+					maxValue : Number(targetEnrollment) + 20,
+					minValue : 0,
+					viewWindow : {
+						max : Number(targetEnrollment) + 20,
+						min : 0
+					}
+				},
+				hAxis : {
+					titleTextStyle : {
+						color : 'black',
+						bold : true,
+						italic : false
+					},
+					textPosition : 'center'
+				}
+			};
+			lineChart = new google.visualization.LineChart(document.getElementById('participants_line'));
+			lineChart.draw(data, lineOptions);
+			$(window).smartresize(function() {
+				lineChart.draw(data, lineOptions);
+			});
+		};
+		
+		function drawDemographic(pieData) {
+			pieChart = new google.visualization.PieChart(document.getElementById('demographic_pie'));
+			pieChart.draw(pieData, pieOptions);
+			$(window).smartresize(function() {
+				pieChart.draw(pieData, pieOptions);
+			});
+		};
+		function drawGender(pieData) {
+			pieChart = new google.visualization.PieChart(document.getElementById('gender_pie'));
+			pieChart.draw(pieData, pieOptions);
+			$(window).smartresize(function() {
+				pieChart.draw(pieData, pieOptions);
+			});
+		};
+		function drawAdverse(pieData) {
+			pieChart = new google.visualization.PieChart(document.getElementById('adverse_pie'));
+			pieChart.draw(pieData, pieOptions);
+			$(window).smartresize(function() {
+				pieChart.draw(pieData, pieOptions);
+			});
+		};
+		function drawSpecimen(pieData) {
+			pieChart = new google.visualization.PieChart(document.getElementById('specimen_pie'));
+			pieChart.draw(pieData, pieOptions);
+			$(window).smartresize(function() {
+				pieChart.draw(pieData, pieOptions);
+			});
+		};
+
+		function getDemographic() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Name');
+			data.addColumn('number', 'Value');
+			data.addRow(["C", 200]);
+			data.addRow(["AA", 100]);
+			data.addRow(["A", 350]);
+			data.addRow(["H", 200]);
+			return data;
+		}
+
+		function getGender() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Name');
+			data.addColumn('number', 'Value');
+			data.addRow(["Male", 950]);
+			data.addRow(["Female", 50]);
+			return data;
+		}
+
+		function getAdverse() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Name');
+			data.addColumn('number', 'Value');
+			data.addRow(["G1", 65]);
+			data.addRow(["G2", 36]);
+			data.addRow(["G3", 22]);
+			data.addRow(["G4", 5]);
+			data.addRow(["G5", 2]);
+			return data;
+		}
+
+		function getSpecimen() {
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Name');
+			data.addColumn('number', 'Value');
+			data.addRow(["Blood", 500]);
+			data.addRow(["Tissue", 300]);
+			data.addRow(["Saliva", 150]);
+			data.addRow(["Marrow", 50]);
+			return data;
+		}
+
+
+		google.charts.setOnLoadCallback(function() {
+			drawDemographic(getDemographic());
+			drawGender(getGender());
+			drawAdverse(getAdverse());
+			drawSpecimen(getSpecimen());
+			drawParticipants();
+		});
+	}); 
+</script>

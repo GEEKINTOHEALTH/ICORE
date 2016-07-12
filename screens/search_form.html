@@ -1,0 +1,668 @@
+<style type="text/css" media="screen">
+
+    .entry:not(:first-of-type)
+    {
+        margin-top: 10px;
+    }
+
+    .glyphicon
+    {
+        font-size: 12px;
+    }
+    .form-control{
+        display:inline;
+        float:left;
+        width:auto;
+    }
+    .scrollit {
+        overflow:scroll;
+        height:300px;
+    }
+
+
+
+</style>
+
+
+<div class="container">
+    <div class="row">
+        <div class="control-group">
+            <div class="controls">
+                <form role="form" autocomplete="off" class="form-inline">
+                    <div class="entry input-group col-xs-7">
+
+                        <select class="form-control" name="tests[]">
+                            <option value="">Import Query</option>
+                            <option value="1">My Datasets</option>
+                            <option value="2">Query List</option>
+                            <option value="3">Favorites</option>
+                            <option value="4">Recent</option>
+
+                        </select>
+
+                        <div class="input-group-addon"></div>
+                        <select class="form-control" id="mySelect" onchange="showCriteria()">
+                            <option>Add Criteria</option>
+                            <option value="CancerTypeDiv"><a href="#">Cancer & Study Type</a></option>
+                            <option value="DemographicDiv"><a href="#">Demographics</a></option>
+                            <option value="ResponseTypeDiv"><a href="#">Response</a></option>
+                            <option value="MeasurementDiv"><a href="#">Measurement</a></option>
+                        </select>
+
+                        <div class="input-group-addon"></div>
+                        <input class="form-control" name="" type="text" placeholder="Search Term..." />
+                  <span class="input-group-btn">
+                            <button onclick="showSearchField()" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="control-group">
+            <div class="controls">
+                <form role="form" autocomplete="off" class="form-inline">
+                    <div class="entry input-group col-xs-7">
+
+                        <select class="form-control" name="tests[]">
+                            <option value="">Test</option>
+                            <option value="1">Cytokine</option>
+                            <option value="2">Flow</option>
+                            <option value="3">Micro RNA</option>
+                            <option value="4">ELISPOT</option>
+                            <option value="5">Proliferation</option>
+                            <option value="6">TCR</option>
+                            <option value="7">RNA Seq</option>
+                            <option value="8">Proto Assay</option>
+                            <option value="9">IHC</option>
+
+
+                        </select>
+                        <div class="input-group-addon"></div>
+                        <select class="form-control" name="markers[]">
+                            <option value="">Marker</option>
+                            <option value="1">bFGF</option>
+                            <option value="2">PIGF</option>
+                            <option value="3">sFlt-1</option>
+                            <option value="4">Tie-2</option>
+                            <option value="5">VEGF</option>
+                            <option value="6">VEGF-C</option>
+                            <option value="7">VEGF-D</option>
+                            <option value="8">CRP</option>
+                            <option value="9">SAA</option>
+                            <option value="10">sICAM-1</option>
+                            <option value="11">sVCAM-1</option>
+                            <option value="12">Eotaxin</option>
+                            <option value="13">Eotaxin-3</option>
+                            <option value="14">IL-8</option>
+                            <option value="15">IP-10</option>
+                            <option value="16">MCP-1</option>
+                            <option value="17">MCP-4</option>
+                            <option value="18">MDC</option>
+                            <option value="19">MIP-1?</option>
+                            <option value="20">TARC</option>
+                            <option value="21">IFN-?</option>
+                            <option value="22">IL-10</option>
+                            <option value="23">IL-12p70</option>
+                            <option value="24">IL-13</option>
+                            <option value="25">IL-1?</option>
+                            <option value="26">IL-2</option>
+                            <option value="27">IL-4</option>
+                            <option value="28">IL-6</option>
+                            <option value="29">IL-82</option>
+                            <option value="30">TNF-?</option>
+                            <option value="31">GM-CSF</option>
+                            <option value="32">IL-12/IL-23p40</option>
+                            <option value="33">IL-15</option>
+                            <option value="34">IL-16</option>
+                            <option value="35">IL-5</option>
+                            <option value="36">IL-7</option>
+                            <option value="37">VEGF2</option>
+                            <option value="38">IL-17A</option>
+                            <option value="39">TGF-BETA</option>
+                            <option value="40">Ki-67</option>
+                            <option value="41">PDC</option><!--flow-->
+                            <option value="42">bFgF</option><!--cyto-->
+
+
+
+
+
+                        </select>
+                        <div class="input-group-addon"></div>
+                        <select class="form-control">
+                            <option value="">Operator</option>
+                            <option value="1"><</option>
+                            <option value="2">></option>
+                            <option value="3">=</option>
+
+                        </select>
+                        <div class="input-group-addon"></div>
+                        <input class="form-control" name="" type="text" placeholder="Value" />
+                  <span class="input-group-btn">
+                  <button class="btn btn-primary btn-add-test" type="button"> <span class="glyphicon glyphicon-plus"></span> </button>
+                  </span>
+                    </div>
+
+                    <div class="entry input-group col-xs-7">
+
+                        <select class="form-control" name="intervention[]">
+                            <option value="">Intervention</option>
+                            <option value="1">Drug (including placebo)</option>
+                            <option value="2">Device (including sham)</option>
+                            <option value="3">Biological/Vaccine</option>
+                            <option value="4">Procedure/Surgery</option>
+                            <option value="5">Radiation</option>
+                            <option value="6">Behavioral (e.g., Psychotherapy, Lifestyle Counseling)</option>
+                            <option value="7">Genetic (including gene transfer, stem cell and recombinant DNA)</option>
+                            <option value="8">Dietary Supplement (e.g., vitamins, minerals)</option>
+                            <option value="9">Immunotherapy</option>
+                            <option value="10">Other</option>
+                        </select>
+                        <div class="input-group-addon"></div>
+                        <!--Make this hidden until the intervention - drug is selected-->
+                        <select class="form-control" name="drug[]">
+                            <option value="">Drug</option>
+                            <option value="1">None</option>
+                            <option value="2">Abraxane (Paclitaxel Injection)</option>
+                            <option value="3">Adcetris (Brentuximab Vedotin Injection)</option>
+                            <option value="4">Adriamycin (Doxorubicin)</option>
+                            <option value="5">Adrucil Injection (5-FU (fluorouracil))</option>
+                            <option value="6">Afinitor (Everolimus)</option>
+                            <option value="7">Afinitor Disperz (Everolimus)</option>
+                            <option value="8">Alimta (PEMETREXED)</option>
+                            <option value="9">Alkeran Injection (Melphalan Injection)</option>
+                            <option value="10">Alkeran Tablets (Melphalan)</option>
+                            <option value="11">Aredia (Pamidronate)</option>
+                            <option value="12">Arimidex (Anastrozole)</option>
+                            <option value="13">Aromasin (Exemestane)</option>
+                            <option value="14">Arranon (Nelarabine)</option>
+                            <option value="15">Arzerra (Ofatumumab Injection)</option>
+                            <option value="16">Avastin (Bevacizumab)</option>
+                            <option value="17">Beleodaq (Belinostat Injection)</option>
+                            <option value="18">Bexxar (Tositumomab)</option>
+                            <option value="19">BiCNU (Carmustine)</option>
+                            <option value="20">Blenoxane (Bleomycin)</option>
+                            <option value="21">Blincyto (Blinatumomab Injection)</option>
+                            <option value="22">Bosulif (Bosutinib)</option>
+                            <option value="23">Busulfex Injection (Busulfan Injection)</option>
+                            <option value="24">Campath (Alemtuzumab)</option>
+                            <option value="25">Camptosar (Irinotecan)</option>
+                            <option value="26">Caprelsa (Vandetanib)</option>
+                            <option value="27">Casodex (Bicalutamide)</option>
+                            <option value="28">CeeNU (Lomustine)</option>
+                            <option value="29">CeeNU Dose Pack (Lomustine)</option>
+                            <option value="30">Cerubidine (Daunorubicin)</option>
+                            <option value="31">Clolar (Clofarabine Injection)</option>
+                            <option value="32">Cometriq (Cabozantinib)</option>
+                            <option value="33">Cosmegen (Dactinomycin)</option>
+                            <option value="34">Cotellic (Cobimetinib)</option>
+                            <option value="35">Cyramza (Ramucirumab Injection)</option>
+                            <option value="36">CytosarU (Cytarabine)</option>
+                            <option value="37">Cytoxan (Cytoxan)</option>
+                            <option value="38">Cytoxan Injection (Cyclophosphamide Injection)</option>
+                            <option value="39">Dacogen (Decitabine)</option>
+                            <option value="40">DaunoXome (Daunorubicin Lipid Complex Injection)</option>
+                            <option value="41">Decadron (Dexamethasone)</option>
+                            <option value="42">DepoCyt (Cytarabine Lipid Complex Injection)</option>
+                            <option value="43">Dexamethasone Intensol (Dexamethasone)</option>
+                            <option value="44">Dexpak Taperpak (Dexamethasone)</option>
+                            <option value="45">Docefrez (Docetaxel)</option>
+                            <option value="46">Doxil (Doxorubicin Lipid Complex Injection)</option>
+                            <option value="47">Droxia (Hydroxyurea)</option>
+                            <option value="48">DTIC (Decarbazine)</option>
+                            <option value="49">Eligard (Leuprolide)</option>
+                            <option value="50">Ellence (Ellence (epirubicin))</option>
+                            <option value="51">Eloxatin (Eloxatin (oxaliplatin))</option>
+                            <option value="52">Elspar (Asparaginase)</option>
+                            <option value="53">Emcyt (Estramustine)</option>
+                            <option value="54">Erbitux (Cetuximab)</option>
+                            <option value="55">Erivedge (Vismodegib)</option>
+                            <option value="56">Erwinaze (Asparaginase Erwinia chrysanthemi)</option>
+                            <option value="57">Ethyol (Amifostine)</option>
+                            <option value="58">Etopophos (Etoposide Injection)</option>
+                            <option value="59">Eulexin (Flutamide)</option>
+                            <option value="60">Fareston (Toremifene)</option>
+                            <option value="61">Farydak (Panobinostat)</option>
+                            <option value="62">Faslodex (Fulvestrant)</option>
+                            <option value="63">Femara (Letrozole)</option>
+                            <option value="64">Firmagon (Degarelix Injection)</option>
+                            <option value="65">Fludara (Fludarabine)</option>
+                            <option value="66">Folex (Methotrexate Injection)</option>
+                            <option value="67">Folotyn (Pralatrexate Injection)</option>
+                            <option value="68">FUDR (FUDR (floxuridine))</option>
+                            <option value="69">Gazyva (Obinutuzumab Injection)</option>
+                            <option value="70">Gemzar (Gemcitabine)</option>
+                            <option value="71">Gilotrif (Afatinib)</option>
+                            <option value="72">Gleevec (Imatinib Mesylate)</option>
+                            <option value="73">Gliadel Wafer (Carmustine wafer)</option>
+                            <option value="74">Halaven (Eribulin Injection)</option>
+                            <option value="75">Herceptin (Trastuzumab)</option>
+
+                        </select>
+                        <span class="input-group-btn">
+                  <button class="btn btn-primary btn-add-intervention" type="button"> <span class="glyphicon glyphicon-plus"></span></button>
+                  </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" id="CancerTypeDiv" style="display:none;">
+    <div class="row">
+        <div class="control-group">
+            <div class="controls">
+                <form role="form" autocomplete="off" class="form-inline">
+                    <div class="entry input-group col-xs-7">
+                        <select class="form-control" name="tests[]">
+                            <option value="">Cancer Type</option>
+                            <option value="1">Adrenal Cancer</option>
+                            <option value="2">Anal Cancer</option>
+                            <option value="3">Bile Duct Cancer</option>
+                            <option value="4">Bladder Cancer</option>
+                            <option value="5">Bone Cancer</option>
+                            <option value="6">Brain/CNS Tumors In Adults</option>
+                            <option value="7">Brain/CNS Tumors In Children</option>
+                            <option value="8">Breast Cancer</option>
+                            <option value="9">Breast Cancer In Men</option>
+                            <option value="10">Cancer in Adolescents</option>
+                            <option value="11">Cancer in Children</option>
+                            <option value="12">Cancer in Young Adults</option>
+                            <option value="13">Cancer of Unknown Primary</option>
+                            <option value="14">Castleman Disease</option>
+                            <option value="15">Cervical Cancer</option>
+                            <option value="16">Colon/Rectum Cancer</option>
+                            <option value="17">Endometrial Cancer</option>
+                            <option value="18">Esophagus Cancer</option>
+                            <option value="19">Ewing Family Of Tumors</option>
+                            <option value="20">Eye Cancer</option>
+                            <option value="21">Gallbladder Cancer</option>
+                            <option value="22">Gastrointestinal Carcinoid Tumors</option>
+                            <option value="23">Gastrointestinal Stromal Tumor (GIST)</option>
+                            <option value="24">Gestational Trophoblastic Disease</option>
+                            <option value="25">Hodgkin Disease</option>
+                            <option value="26">Kaposi Sarcoma</option>
+                            <option value="27">Kidney Cancer</option>
+                            <option value="28">Laryngeal and Hypopharyngeal Cancer</option>
+                            <option value="29">Leukemia</option>
+                            <option value="30">Leukemia - Acute Lymphocytic (ALL) in Adults</option>
+                            <option value="31">Leukemia - Acute Myeloid (AML)</option>
+                            <option value="32">Leukemia - Chronic Lymphocytic (CLL)</option>
+                            <option value="33">Leukemia - Chronic Myeloid (CML)</option>
+                            <option value="34">Leukemia - Chronic Myelomonocytic (CMML)</option>
+                            <option value="35">Leukemia in Children</option>
+                            <option value="36">Liver Cancer</option>
+                            <option value="37">Lung Cancer</option>
+                            <option value="38">Lung Cancer - Non-Small Cell</option>
+                            <option value="39">Lung Cancer - Small Cell</option>
+                            <option value="40">Lung Carcinoid Tumor</option>
+                            <option value="41">Lymphoma</option>
+                            <option value="42">Lymphoma of the Skin</option>
+                            <option value="43">Malignant Mesothelioma</option>
+                            <option value="44">Multiple Myeloma</option>
+                            <option value="45">Myelodysplastic Syndrome</option>
+                            <option value="46">Nasal Cavity and Paranasal Sinus Cancer</option>
+                            <option value="47">Nasopharyngeal Cancer</option>
+                            <option value="48">Neuroblastoma</option>
+                            <option value="49">Non-Hodgkin Lymphoma</option>
+                            <option value="50">Non-Hodgkin Lymphoma In Children</option>
+                            <option value="51">Oral Cavity and Oropharyngeal Cancer</option>
+                            <option value="52">Osteosarcoma</option>
+                            <option value="53">Ovarian Cancer</option>
+                            <option value="54">Pancreatic Cancer</option>
+                            <option value="55">Penile Cancer</option>
+                            <option value="56">Pituitary Tumors</option>
+                            <option value="57">Prostate Cancer</option>
+                            <option value="58">Retinoblastoma</option>
+                            <option value="59">Rhabdomyosarcoma</option>
+                            <option value="60">Salivary Gland Cancer</option>
+                            <option value="61">Sarcoma - Adult Soft Tissue Cancer</option>
+                            <option value="62">Skin Cancer</option>
+                            <option value="63">Skin Cancer - Basal and Squamous Cell</option>
+                            <option value="64">Skin Cancer - Melanoma</option>
+                            <option value="65">Skin Cancer - Merkel Cell</option>
+                            <option value="66">Small Intestine Cancer</option>
+                            <option value="67">Stomach Cancer</option>
+                            <option value="68">Testicular Cancer</option>
+                            <option value="69">Thymus Cancer</option>
+                            <option value="70">Thyroid Cancer</option>
+                            <option value="71">Uterine Sarcoma</option>
+                            <option value="72">Vaginal Cancer</option>
+                            <option value="73">Vulvar Cancer</option>
+                            <option value="74">Waldenstrom Macroglobulinemia</option>
+                            <option value="75">Wilms Tumor</option>
+
+                        </select>
+                        <div class="input-group-addon"></div>
+                        <select class="form-control" name="markers[]">
+                            <option value="">Study Type</option>
+                            <option value="1">Intervention</option>
+                            <option value="2">Observational </option>
+                            <option value="3">Expanded Access</option>
+
+                        </select>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="DemographicDiv" style="display:none;">
+    <div class="row">
+        <div class="control-group">
+            <div class="controls">
+                <form role="form" autocomplete="off" class="form-inline">
+                    <div class="entry input-group col-xs-7">
+
+                        <select class="form-control">
+                            <option value="">Age</option>
+                            <option value="1">Under 25</option>
+                            <option value="2">25 - 34</option>
+                            <option value="3">35 - 44</option>
+                            <option value="4">Over 45</option>
+                        </select>
+                        <div class="input-group-addon"></div>
+                        <!--Make this hidden until the intervention - drug is selected-->
+                        <select class="form-control">
+                            <option value="">Gender</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                            <option value="3">Other</option>
+                        </select>
+                        <div class="input-group-addon"></div>
+                        <!--Make this hidden until the intervention - drug is selected-->
+                        <select class="form-control">
+                            <option value="">Race</option>
+                            <option value="1">W</option>
+                            <option value="2">AA</option>
+                            <option value="3">H</option>
+                            <option value="4">A</option>
+                            <option value="5">Other</option>
+
+                        </select>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="ResponseTypeDiv" style="display:none;">
+    <div class="row">
+        <div class="control-group">
+            <div class="controls">
+                <form role="form" autocomplete="off" class="form-inline">
+                    <div class="entry input-group col-xs-7">
+                        <select class="form-control" name="tests[]">
+                            <option value="">Response</option>
+                            <option value="1">G1</option>
+                            <option value="2">G2</option>
+                            <option value="3">G3</option>
+                            <option value="4">G4</option>
+                            <option value="5">G5</option>
+
+                        </select>
+                        <div class="input-group-addon"></div>
+                        <input class="form-control" name="" type="text" placeholder="Begin Range" />
+                        <div class="input-group-addon">Weighted Average Grade</div>
+                        <input class="form-control" name="" type="text" placeholder="End Range" />
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="MeasurementDiv" style="display:none;">
+    <div class="row">
+        <div class="control-group">
+            <div class="controls">
+                <form role="form" autocomplete="off" class="form-inline">
+                    <div class="entry input-group col-xs-7">
+                        <select class="form-control" name="tests[]">
+                            <option value="">Measurement</option>
+                            <option value="1">Centimeter</option>
+                            <option value="3">Inches</option>
+                        </select>
+                        <div class="input-group-addon"></div>
+                        <input class="form-control" name="" type="text" placeholder="Value" />
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row" id="SearchFieldDiv" style="display:none;">
+
+    <div class="row">
+        <button type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-import" aria-hidden="true"></span> SAVE
+        </button>
+
+        <button type="button" class="btn btn-default" aria-label="Left Align">
+            <span class="glyphicon glyphicon-export" aria-hidden="true"></span> EXPORT
+        </button>
+    </div>
+
+    <div class="col-xs-10 col-xs-offset-1" >
+        <div class="table-wrapper card" style="margin-top: 20px;" >
+            <table class="table-bordered  table-condensed cf table-hover" width="100%">
+                <thead class="cf" style="background:#ffe5e5;">
+                <tr>
+                    <th>
+                        <a class="pull-left" style="margin-left: 10px;" onclick="$('body').trigger('add-patient-to-study');">
+                            <i class="fa fa-user-plus fa-lg" style="color: #333;"></i>
+                        </a>
+                        <span>Patients</span></th>
+
+                    <th>
+                        <input class="pull-left" type="checkbox"/>
+                        <span>IHC: Ki-67</span></th>
+                    <th>
+                        <input class="pull-left" type="checkbox"/>
+                        <span>Flow Cytometry: PDC </span></th>
+                    <th>
+                        <input class="pull-left" type="checkbox"/>
+                        <span>Cytokine: bFgF</span></th>
+                    <th>
+                        <input class="pull-left" type="checkbox"/>
+                        <span>Drug</span></th>
+                    <th>
+                        <input class="pull-left" type="checkbox"/>
+                        <span>Cancer Type</span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody id="study-details" class="searchable">
+                <tr>
+                    <td>
+                        <input class="pull-left" style="margin-left: 10px;margin-top: 10px;" type="checkbox"/>
+                        <a class="btn btn-default" onclick="$('body').trigger('single-patient-view');">John Doe</a></td>
+                    <td>Ki-67 - 6.4</td>
+                    <td>PDC - 0.34</td>
+                    <td>bFgF - 2.1</td>
+                    <td>Dacogen</td>
+                    <td>Prostate Cancer</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="pull-left" style="margin-left: 10px;margin-top: 10px;" type="checkbox"/>
+                        <a class="btn btn-default" onclick="$('body').trigger('single-patient-view');">Janet Johnson</a></td>
+                    <td>Ki-67 - 7.2</td>
+                    <td>PDC - 0.33</td>
+                    <td>bFgF - 2.5</td>
+                    <td>Abraxane</td>
+                    <td>Prostate Cancer</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="pull-left" style="margin-left: 10px;margin-top: 10px;" type="checkbox"/>
+                        <a class="btn btn-default" onclick="$('body').trigger('single-patient-view');">Nick Nightingale</a></td>
+                    <td>Ki-67 - 5.3</td>
+                    <td>PDC - 0.16</td>
+                    <td>bFgF - 1.7</td>
+                    <td>Dacogen</td>
+                    <td>Prostate Cancer</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="pull-left" style="margin-left: 10px;margin-top: 10px;" type="checkbox"/>
+                        <a class="btn btn-default" onclick="$('body').trigger('single-patient-view');">Francis Frasier</a></td>
+                    <td>Ki-67 - 6.2</td>
+                    <td>PDC - 0.14</td>
+                    <td>bFgF - 2.9</td>
+                    <td>Abraxane</td>
+                    <td>Prostate Cancer</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="pull-left" style="margin-left: 10px;margin-top: 10px;" type="checkbox"/>
+                        <a class="btn btn-default" onclick="$('body').trigger('single-patient-view');">Dewey Donald</a></td>
+                    <td>Ki-67 - 5.5</td>
+                    <td>PDC - 0.39</td>
+                    <td>bFgF - 4.6</td>
+                    <td>Abraxane</td>
+                    <td>Prostate Cancer</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="pull-left" style="margin-left: 10px;margin-top: 10px;" type="checkbox"/>
+                        <a class="btn btn-default" onclick="$('body').trigger('single-patient-view');">Shana Schwartz</a></td>
+                    <td>Ki-67 - 6.4</td>
+                    <td>PDC - 0.29</td>
+                    <td>bFgF - 1.9</td>
+                    <td>Dacogen</td>
+                    <td>Prostate Cancer</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <br/>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function showCriteria()
+    {
+        var x = document.getElementById("mySelect").value;
+        console.log(x);
+        document.getElementById(x).style.display = "block";
+    }
+
+
+    function showSearchField(){
+        document.getElementById('SearchFieldDiv').style.display = "block";
+    }
+
+    //CODE FOR TABLE POPULATION
+    $(function() {
+        $('.pg-holder').hide();
+        function renderStudyList(rows) {
+            var StudyTemplate = $('#study-template').html();
+            var StudyHtml = Mustache.to_html(StudyTemplate, {
+                'rows' : rows
+            });
+            $("#study-list").html(StudyHtml);
+            $.bootstrapSortable( applyLast = true);
+        }
+
+        var qry = {
+                    'studyid' : {
+                        $ne : ""
+                    }
+                },
+                rows = '',
+                pageHitCount = 1,
+                startRange = 0;
+        function bootstrapPageRendering() {
+            rows = db2.getCollection('STUDIES').findObjects(qry);
+            //if total rows count is less than 50,pagination not required
+            if (rows.constructor === Array && rows.length > 5) $('.pg-holder').show();
+            renderStudyList(onLeft(rows, startRange, pageHitCount));
+        }
+
+        if (!localStorage.getItem('DATASOURCES')) {
+            setTimeout(function() {bootstrapPageRendering();}, 10000);
+            return;
+        }
+        bootstrapPageRendering();
+
+        $('#pg-left').click(function() {
+            pageHitCount = pageHitCount - 1;
+            startRange = startRange - 5;
+            renderStudyList(onLeft(rows, startRange, pageHitCount));
+        });
+
+        $('#pg-right').click(function() {
+            pageHitCount = pageHitCount + 1;
+            startRange = startRange + 5;
+            renderStudyList(onRight(rows, startRange, pageHitCount));
+        });
+    });
+
+    //CODE FOR NEW VARIABLE ENTRY
+    $(function()
+    {
+        $(document).on('click', '.btn-add-test', function(e)
+        {
+            e.preventDefault();
+
+            var controlForm = $('.controls form:first'),
+                    currentEntry = $(this).parents('.entry:first'),
+                    newEntry = $(currentEntry.clone()).prependTo(controlForm);
+
+            newEntry.find('input').val('');
+            controlForm.find('.entry:not(:first) .btn-add-test')
+                    .removeClass('btn-add-test').addClass('btn-remove-test')
+                    .removeClass('btn-success').addClass('btn-danger')
+                    .html('<span class="glyphicon glyphicon-minus"></span>');
+        }).on('click', '.btn-remove-test', function(e)
+        {
+            $(this).parents('.entry:first').remove();
+
+            e.preventDefault();
+            return false;
+        });
+    });
+
+    $(function()
+    {
+        $(document).on('click', '.btn-add-intervention', function(e)
+        {
+            e.preventDefault();
+
+            var controlForm = $('.controls form:first'),
+                    currentEntry = $(this).parents('.entry:first'),
+                    newEntry = $(currentEntry.clone()).prependTo(controlForm);
+
+            newEntry.find('input').val('');
+            controlForm.find('.entry:not(:first) .btn-add-intervention')
+                    .removeClass('btn-add-intervention').addClass('btn-remove-intervention')
+                    .removeClass('btn-success').addClass('btn-danger')
+                    .html('<span class="glyphicon glyphicon-minus"></span>');
+        }).on('click', '.btn-remove-intervention', function(e)
+        {
+            $(this).parents('.entry:first').remove();
+
+            e.preventDefault();
+            return false;
+        });
+    });
+
+</script>

@@ -1,0 +1,85 @@
+<div class="container animated fadeInUp" style="margin-top: 20px;">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="main-div-wrapper card-2">
+				<div style="text-align: center;">
+					<span style="font-size: 1.5em;">CREATE RESEARCH REQUEST</span>
+				</div>
+				<br />
+				<form id="">
+					<div class="form-group">
+						<select class="form-control" name="tests">
+							<option value="">Select Bioinformatician</option>
+							<option value="1">Bioinformatician-1</option>
+							<option value="2">Bioinformatician-2</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<select id="select_study" class="form-control">
+							<option value="">Select Study</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Hypothesis"/>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Introduction"/>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Methods"/>
+					</div>
+					<div class="form-group">
+						<input type="text"  class="form-control" placeholder="Data Sets"/>
+					</div>
+					<div class="form-group">
+						<label for="ref">References</label>
+						<table class="table" id="ref">
+							<thead>
+								<tr>
+									<th>no</th>
+									<th>Title</th>
+									<th>Source</th>
+									<th>Author</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>......</td>
+									<td>......</td>
+									<td>......</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<br>
+					<br>
+					<div class="row">
+						<div class="col-md-4">
+							<a class="btn btn-primary btn-block">Save Draft</a>
+						</div>
+						<div class="col-md-4">
+							<a class="btn btn-primary btn-block">Share</a>
+						</div>
+						<div class="col-md-4">
+							<a class="btn btn-primary btn-block">Publish</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script id="study-title-options-template" type="text/template">
+	{{#rows}}
+		<option value="{{studyid}}">{{studytitle}}</option>
+	{{/rows}}
+</script>
+<script type="text/javascript">
+  $(function(){
+  		var qry = {'studyid' : {$ne : ""}};
+		var studies = db2.getCollection('STUDIES').findObjects(qry);
+		$('#select_study').append(prepareHtml('study-title-options-template')(studies));
+  });
+</script>

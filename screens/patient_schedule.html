@@ -1,0 +1,38 @@
+<style type="text/css">
+	.fc-button-group, .fc button {
+		display: inline-block;
+	}
+</style>
+<div class="container animated fadeInUp" style="margin-top: 20px;">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="main-div-wrapper card-2">
+				<div id="schedule"></div>
+				<br />
+				<div class="bottom" style="float: right;">
+					<a class="btn btn-primary">Share</a>
+					<a class="btn btn-primary" style="margin : 0px 20px;">Email</a>
+					<a class="btn btn-primary">Print</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+  $(function(){
+  	$("#schedule").fullCalendar({
+  		header: {
+        left: 'prev,next today myCustomButton',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+    },
+    googleCalendarApiKey: 'AIzaSyC18wcox0jCmcKo2ebF6m7EUNkgu9Bzsro',
+    events : {
+    	googleCalendarId: 'ddelvj6phai888c8bfqitg31go@group.calendar.google.com'
+    },
+    googleCalendarError : function(response){
+    	console.log(JSON.stringify(response));
+    }
+  	});
+  });
+</script>

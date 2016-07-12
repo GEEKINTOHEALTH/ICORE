@@ -1,0 +1,313 @@
+<style type="text/css">
+    .timeline {
+        list-style: none;
+        padding: 20px 0 20px;
+        position: relative;
+    }
+    
+    .timeline-badge{
+		background:blue;
+		color:white !important;
+		padding:0px 10px;
+		min-width:100px;
+	}
+    
+    .timeline:before {
+        top: 50px;
+        bottom: 0;
+        position: absolute;
+        content: " ";
+        width: 1px;
+        background-color: black;
+        left: 50%;
+        margin-left: -1.5px;
+    }
+    
+    .timeline > li {
+        margin-bottom: 10px;
+        position: relative;
+    }
+    
+    .timeline > li:before, .timeline > li:after {
+        content: " ";
+        display: table;
+    }
+    
+    .timeline > li:after {
+        clear: both;
+    }
+    
+    .timeline > li:before, .timeline > li:after {
+        content: " ";
+        display: table;
+    }
+    
+    .timeline > li:after {
+        clear: both;
+    }
+    
+    .timeline > li > .timeline-panel {
+    	margin-left : 30px;
+        width: 46%;
+        float: left;
+        border: 1px solid silver;
+        border-radius: 2px;
+        padding: 10px;
+        position: relative;
+        /*-webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);*/
+        /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);*/
+        background: rgba(255, 255, 255, 0.8);
+    }
+    
+    .timeline > li > .timeline-panel:before {
+        position: absolute;
+        top: 26px;
+        right: -15px;
+        display: inline-block;
+        border-top: 15px solid transparent;
+        border-left: 15px solid #ccc;
+        border-right: 0 solid #ccc;
+        border-bottom: 15px solid transparent;
+        content: " ";
+    }
+    
+    .timeline > li > .timeline-panel:after {
+        position: absolute;
+        top: 27px;
+        right: -14px;
+        display: inline-block;
+        border-top: 14px solid transparent;
+        border-left: 14px solid #fff;
+        border-right: 0 solid #fff;
+        border-bottom: 14px solid transparent;
+        content: " ";
+    }
+    
+    .timeline > li > .timeline-badge {
+        color: #000;
+        width: 80px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 1em;
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        margin-left: -50px;
+        background-color: #999999;
+        z-index: 100;
+        border-top-right-radius: 5% !important;
+        border-top-left-radius: 5% !important;
+        border-bottom-right-radius: 5% !important;
+        border-bottom-left-radius: 5% !important;
+        border: 1px solid white;
+        -webkit-box-shadow: 0 0px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0px 6px rgba(0, 0, 0, 0.5);
+    }
+    
+    .timeline-badge > i {
+        margin-top: 15px;
+    }
+    
+    .timeline > li > .timeline-inverted.timeline-panel {
+    	margin-right : 30px;
+    	margin-left : 0px;
+        float: right;
+    }
+    
+    .timeline > li > .timeline-panel {
+    	margin-top : 50px;
+    }
+    
+    .timeline > li > .timeline-inverted.timeline-panel:before {
+        border-left-width: 0;
+        border-right-width: 15px;
+        left: -15px;
+        right: auto;
+    }
+    
+    .timeline > li > .timeline-inverted.timeline-panel:after {
+        border-left-width: 0;
+        border-right-width: 14px;
+        left: -14px;
+        right: auto;
+    }
+    
+    .timeline-badge.primary {
+        background-color: #2e6da4 !important;
+    }
+    
+    .timeline-badge.success {
+        background-color: #3f903f !important;
+    }
+    
+    .timeline-badge.warning {
+        background-color: #f0ad4e !important;
+    }
+    
+    .timeline-badge.danger {
+        background-color: #d9534f !important;
+    }
+    
+    .timeline-badge.info {
+        background-color: #5bc0de !important;
+    }
+    
+    .timeline-title {
+        margin-top: 0;
+        color: black;
+        background: #fff;
+        padding: 5px 10px;
+        font-weight: 300;
+        letter-spacing: 2px;
+        font-family: Raleway;
+        border-bottom: 1px solid silver;
+    }
+    
+    .timeline-body {
+		width: 100%;
+    	height: 100px;
+    	
+	}
+    
+    .timeline-body > p, .timeline-body > ul {
+        margin-bottom: 0;
+    }
+    
+    .timeline-body > p + p {
+        margin-top: 5px;
+    }
+    
+    @media (max-width: 767px) {
+        		ul.timeline:before {
+        			left: 40px;
+        		}
+        		ul.timeline > li > .timeline-panel {
+        			width: calc(100% - 90px);
+        			width: -moz-calc(100% - 90px);
+        			width: -webkit-calc(100% - 90px);
+        		}
+        		ul.timeline > li > .timeline-badge {
+        			left: 15px;
+        			margin-left: 0;
+        			top: 16px;
+        		}
+        		ul.timeline > li > .timeline-panel {
+        			float: right;
+        		}
+        		ul.timeline > li > .timeline-panel:before {
+        			border-left-width: 0;
+        			border-right-width: 15px;
+        			left: -15px;
+        			right: auto;
+        		}
+        		ul.timeline > li > .timeline-panel:after {
+        			border-left-width: 0;
+        			border-right-width: 14px;
+        			left: -14px;
+        			right: auto;
+        		}
+        	}
+</style>
+<div class="container-fluid">
+	<div class="row" style="margin-top: 15px;">
+		<div class="col-sm-12">
+			<div class="card-panel pull-right text-right">
+				<p class="hospital-data" onclick="$('body').trigger('study-details');">
+					<span>Study Name:</span>
+					A Neoadjuvant Phase IIa Study of Ipilimumab
+					<br/>
+					<span>Primary investigator:</span>
+					Padmanee Sharma, MD, PHD	M.D. Anderson Cancer Center
+				</p>
+			</div>
+			<div class="card-1" style="background: white;padding: 10px">
+				<table border="0" onclick="$('body').trigger('patient-details1');">
+					<tr>
+						<td width="90px" align="center" valign="middle"><img src="https://randomuser.me/api/portraits/men/40.jpg" width="90"></td>
+						<td  width="90%" style="padding:10px;padding-left: 20px;" align="center">
+						<p class="profile-data text-left" style="margin-top: 10px;">
+							<span>Name:</span>
+							John Doe
+							<br/>
+							<span>Age:</span>
+							33
+							<br/>
+							<span>Gender:</span>
+							Male
+							<br/>
+						</p></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="container animated fadeInUp">
+		<ul class="timeline" id="vertical_timeline"></ul>
+	</div>
+</div>
+<div id="vertical-timeline-template" style="display: none;">
+	{{#rows}}
+	<li>
+		{{{badge}}}
+		<div class="{{tlcss}} timeline-panel" >
+			<div class="timeline-heading">
+				<h4 class="timeline-title">{{title}}</h4>
+			</div>
+			<div class="timeline-body"></div>
+		</div>
+	</li>
+	{{/rows}}
+</div>
+<script type="text/javascript">
+	$(function() {
+		$("#menubutton").show();
+		$("#homebutton").show();
+		$("#top-right-holder").show();
+		var hs_array = [{
+				'tlcss' : 'timeline-inverted',
+				'badge' : '<div class="timeline-badge primary">01/01/2010</div>',
+				'title' : 'CLINICAL LABS'
+			},{
+				'title' : 'IHC'
+			},{
+				'tlcss' : 'timeline-inverted',
+				'title' : 'CYTOKINE'
+			},{
+				'title' : 'SPECIMAN COLLECTION'
+			},{
+				'tlcss' : 'timeline-inverted',
+				'badge' : '<div class="timeline-badge warning">01/01/2011</div>',
+				'title' : 'CLINICAL LABS'
+			},{
+				'title' : 'IHC'
+			},{
+				'tlcss' : 'timeline-inverted',
+				'title' : 'CYTOKINE'
+			},{
+				'title' : 'SPECIMAN COLLECTION'
+			},{
+				'tlcss' : 'timeline-inverted',
+				'badge' : '<div class="timeline-badge success">01/01/2012</div>',
+				'title' : 'CLINICAL LABS'
+			},{
+				'title' : 'IHC'
+			},{
+				'tlcss' : 'timeline-inverted',
+				'title' : 'CYTOKINE'
+			},{
+				'title' : 'SPECIMAN COLLECTION'
+			},{
+				'tlcss' : 'timeline-inverted',
+				'badge' : '<div class="timeline-badge danger">01/01/2013</div>',
+				'title' : 'CLINICAL LABS'
+			},{
+				'title' : 'IHC'
+			},{
+				'tlcss' : 'timeline-inverted',
+				'title' : 'CYTOKINE'
+			},{
+				'title' : 'SPECIMAN COLLECTION'
+			}];
+		$("#vertical_timeline").html(prepareHtml('vertical-timeline-template')(hs_array));
+	}); 
+</script>

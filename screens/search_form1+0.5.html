@@ -1,0 +1,168 @@
+<style type="text/css" media="screen">
+
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    th {background-color: #dcafbe;}
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr {background-color: #f2f2f2}
+
+    tr:hover {
+        background-color: grey;
+    }
+
+/*
+    On click for a single row
+*/
+    .on{
+
+        background-color:grey;
+    }
+/*
+    Scroll box for table
+*/
+    .scrollit {
+        overflow:scroll;
+        height:200px;
+    }
+</style>
+
+
+
+<div class="container">
+        <div >
+            <label class="col-md-1 control-label" style="color: white">Cancer Type</label>
+            <div class="col-md-2">
+                <select id="cancerType" name="selectbasic" class="form-control">
+                    <option value="1">Option one</option>
+                    <option value="2">Option two</option>
+                </select>
+            </div>
+        </div>
+
+        <div >
+            <label class="col-md-1 control-label" style="color: white">Study Type</label>
+            <div class="col-md-2">
+                <select id="studyStatus" name="selectbasic" class="form-control">
+                    <option value="1">Option one</option>
+                    <option value="2">Option two</option>
+                </select>
+            </div>
+        </div>
+        <br><br><br>
+    <!--
+    <td colspan="10">
+    <div class = "scrollit">
+    -->
+
+<!--
+    **********************************************************************************************************
+
+
+
+    ADD THE ROW CLICK FUNCTIONALITY
+    ADD THE SCROLL BAR
+
+
+
+    **********************************************************************************************************
+    -->
+
+            <table class="sortable table-bordered  table-condensed cf table-hover" width="100%">
+                <thead class="cf" style="background:#ffe5e5;">
+                <tr>
+                    <th> STUDYID </th>
+                    <th> NCT-NUMBER </th>
+                    <th> TITLE </th>
+                    <th> PHASE </th>
+                    <th> STATUS </th>
+                    <th> STARTDATE </th>
+                    <th> ENDDATE </th>
+                </tr>
+                </thead>
+                    <tbody id="study-list"></tbody>
+
+            </table>
+</div>
+
+<script id='study-template' type="text/template">
+    {{#rows}}
+    <tr style="padding: 20px;">
+        <td style="text-align: center" data-title="STUDYID">
+            <a class="btn btn-default" onclick="$('body').trigger('full-study-view',['{{studyid}}']);">{{studyid}}</a>
+        </td>
+        <td style="text-align: center" data-title="NCTNO">
+            {{ctorgid}}
+        </td>
+        <td style="text-align: right" data-title="STUDYTITLE">
+            {{studytitle}}
+        </td>
+        <td style="text-align: left" data-title="PHASE">
+        </td>
+        <td style="text-align: left" data-title="STATUS">
+        </td>
+        <td style="text-align: left" data-title="STARTDATE">
+            {{startdate}}
+        </td>
+        <td style="text-align: right" data-title="ENDDATE">
+            {{completiondate}}
+        </td>
+    </tr>
+    {{/rows}}
+</script>
+<script>
+    $(function() {
+        $('.pg-holder').hide();
+        function renderStudyList(rows) {
+            var StudyTemplate = $('#study-template').html();
+            var StudyHtml = Mustache.to_html(StudyTemplate, {
+                'rows' : rows
+            });
+            $("#study-list").html(StudyHtml);
+            $.bootstrapSortable( applyLast = true);
+        }
+
+        var qry = {
+                    'studyid' : {
+                        $ne : ""
+                    }
+                },
+                rows = '',
+                pageHitCount = 1,
+                startRange = 0;
+        function bootsrapPageRendering() {
+            rows = db2.getCollection('STUDIES').findObjects(qry);
+            //if total rows count is less than 50,pagination not required
+            if (rows.constructor === Array && rows.length > 50) $('.pg-holder').show();
+            renderStudyList(onLeft(rows, startRange, pageHitCount));
+        }
+
+        if (!localStorage.getItem('DATASOURCES')) {
+            setTimeout(function() {bootsrapPageRendering();}, 10000);
+            return;
+        }
+        bootsrapPageRendering();
+
+        $('#pg-left').click(function() {
+            pageHitCount = pageHitCount - 1;
+            startRange = startRange - 50;
+            renderStudyList(onLeft(rows, startRange, pageHitCount));
+        });
+
+        $('#pg-right').click(function() {
+            pageHitCount = pageHitCount + 1;
+            startRange = startRange + 50;
+            renderStudyList(onRight(rows, startRange, pageHitCount));
+        });
+    });
+</script>

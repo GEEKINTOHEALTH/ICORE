@@ -1,0 +1,197 @@
+<style type="text/css" media="screen">
+    	.para-heading {
+    		color: white;
+    		font-size: 1.2em;
+    	}
+    
+    	#search_popup th {
+    		color: white;
+    		text-align: center;
+    		font-size: 10px;
+    	}
+    
+    	#search_popup td {
+    		color: white;
+    		text-align: center;
+    		font-size: 10px;
+    	}
+    
+    	.addContext {
+    		color: white;
+    		background: rgba(0,0,0,0.2);
+    		border: none;
+    		padding: 10px;
+    	}
+    	.addContext > span {
+    		margin-left: 12px;
+    		margin-bottom: -10px;
+    	}
+    
+    	h4 {
+    		color: white;
+    	}
+    
+    	@media only screen and (max-width: 800px) {
+    
+    		#no-more-tables table, #no-more-tables thead, #no-more-tables tbody, #no-more-tables th, #no-more-tables td, #no-more-tables tr {
+    			display: block;
+    		}
+    
+    		#no-more-tables thead tr {
+    			position: absolute;
+    			top: -9999px;
+    			left: -9999px;
+    		}
+    
+    		#no-more-tables tr {
+    			border: 1px solid #ccc;
+    		}
+    
+    		#no-more-tables td {
+    			border: none;
+    			border-bottom: 1px solid #eee;
+    			position: relative;
+    			padding-left: 50%;
+    			white-space: normal;
+    			text-align: left;
+    		}
+    
+    		#no-more-tables td:before {
+    			position: absolute;
+    			top: 6px;
+    			left: 6px;
+    			width: 45%;
+    			padding-right: 10px;
+    			white-space: nowrap;
+    			text-align: left;
+    			font-weight: bold;
+    		}
+    
+    		#no-more-tables td:before {
+    			content: attr(data-title);
+    		}
+    
+    	}
+</style>
+<div class="container-fluid animated fadeInRight" style="margin-top: 20px;" id="search_popup">
+    <div id="no-more-tables" class="table-responsive">
+        <table class="table-bordered  table-condensed cf">
+            <thead class="cf">
+                <tr>
+                    <th>
+                        Receptor 
+                    </th>
+                    <th>
+                        Patient 
+                    </th>
+                    <th>
+                        Sample 
+                    </th>
+                    <th style="word-wrap:break-word;">
+                        Experiment 
+                    </th>
+                    <th>
+                        Input_ng 
+                    </th>
+                    <th>
+                        Log10 Frequency 
+                    </th>
+                    <th>
+                        Clone Molecule Count From Spikes 
+                    </th>
+                    <th>
+                        Total Read Count 
+                    </th>
+                    <th>
+                        J Segment Major Gene 
+                    </th>
+                    <th>
+                        V Segment Major Gene 
+                    </th>
+                    <th style="word-wrap:break-word;">
+                        Clone Sequence 
+                    </th>
+                    <th style="word-wrap:break-word;">
+                        Clone Protein Sequence 
+                    </th>
+                    <th style="word-wrap:break-word;">
+                        CDR3 Sense Sequence 
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="clinical-data">
+            </tbody>
+        </table>
+    </div>
+</div>
+<script id='clinical-data-table-row' type="text/template">
+    {{#rows}}
+    <tr>
+        <td data-title="Receptor">
+            {{Receptor}}
+        </td>
+        <td data-title="Patient">
+            {{Patient}}
+        </td>
+        <td data-title="Sample">
+            {{Sample}}
+        </td>
+        <td data-title="Experiment">
+            {{Experiment}}
+        </td>
+        <td data-title="Input_ng">
+            {{Input_ng}}
+        </td>
+        <td data-title="Log10_Frequency">
+            {{Log10_Frequency}}
+        </td>
+        <td data-title="Clone_Molecule_Count_From_Spikes">
+            {{Clone_Molecule_Count_From_Spikes}}
+        </td>
+        <td data-title="Total_Read_Count">
+            {{Total_Read_Count}}
+        </td>
+        <td data-title="J_Segment_Major_Gene">
+            {{J_Segment_Major_Gene}}
+        </td>
+        <td data-title="V_Segment_Major_Gene">
+            {{V_Segment_Major_Gene}}
+        </td>
+        <td data-title="Clone_Sequence">
+            {{Clone_Sequence}}
+        </td>
+        <td data-title="Clone_Protein_Sequence">
+            {{Clone_Protein_Sequence}}
+        </td>
+        <td data-title="CDR3_Sense_Sequence">
+            {{CDR3_Sense_Sequence}}
+        </td>
+    </tr>
+    {{/rows}}
+</script>
+
+<script type="text/javascript">
+    $(function(){
+        function search(value){
+            var str = value.toLowerCase();
+            $.ajax({
+                type: 'GET',
+                url: 'http://pediatrictimeline.com/search/' + value,
+                success: function(response){
+                    var clincicalDataRowTemplate = $('#clinical-data-table-row').html();
+                    var clincalDataTableBody = Mustache.to_html(clincicalDataRowTemplate, {
+                        rows: response
+                    });
+                    $("#clinical-data").html(clincalDataTableBody);
+                }
+            });
+        };
+        
+        (function(){
+            if ($('#searchitem').val()) {
+                var string = $('#searchitem').val();
+                search(string);
+            }
+        }());
+	});
+</script>

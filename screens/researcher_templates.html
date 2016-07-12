@@ -1,0 +1,64 @@
+<div class="container animated fadeInUp" style="margin-top: 20px;">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="table-wrapper card-2">
+				<table class="sortable table-bordered  table-condensed table-hover" width="100%">
+					<thead style="background:#ffe5e5;">
+						<tr>
+							<th> TEMPLATES </th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Protocal Template</td>
+							<td><a class="template" data-file="protocol_template_JAN_07_2015.pdf">View Template</a></td>
+						</tr>
+						<tr>
+							<td>Retrospectrive Review Protocal Template</td>
+							<td><a class="template" data-file="Retrospective_review_protocol_template.pdf">View Template</a></td>
+						</tr>
+						<tr>
+							<td>Protocal Amendment Summary Changes</td>
+							<td><a class="template" data-file="protocol_amendment_summary_changes.pdf">View Template</a></td>
+						</tr>
+						<tr>
+							<td>Phase-1 Protocol Template</td>
+							<td><a class="template" data-file="phase_I_protocal_template_10-15-2012.pdf">View Template</a></td>
+						</tr>
+						<tr>
+							<td>Phase-11 Protocol Template</td>
+							<td><a class="template" data-file="phase_II_protocal_template_10-15-2012.pdf">View Template</a></td>
+						</tr>
+						<tr>
+							<td>DMID Minimum Risk</td>
+							<td><a class="template" data-file="DMID_minimal_risk.pdf">View Template</a></td>
+						</tr>
+						<tr>
+							<td>DMID Interventional Template</td>
+							<td><a class="template" data-file="DMID_interventional_template.pdf">View Template</a></td>
+						</tr>
+						<tr>
+							<td>DMID Greater Than Minimal Risk</td>
+							<td><a class="template" data-file="DMID_greater_than_minimalrisk.pdf">View Template</a></td>
+						</tr>
+						<tr>
+							<td>Proposal Writing & Hypothesis Development</td>
+							<td><a class="template" data-file="Proposal_Writing_Johns_Hopkins_Bloomberg_School_of_Public_Health.pdf">View Template</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function() {
+		$("#homebutton").show();
+		$("#top-right-holder").show();
+		$('.template').on('click', function(){
+			LS.set_data('TEMPLATE-FILE', $(this).attr('data-file'));
+			$('body').trigger('show-template');
+		});
+	}); 
+</script>
